@@ -9,7 +9,7 @@
 /** @param {import("@11ty/eleventy").UserConfig} eleventyConfig */
 
 const { eleventyImageTransformPlugin } = require("@11ty/eleventy-img");
-const { feedPlugin } = require("@11ty/eleventy-plugin-rss");
+const pluginRss = require("@11ty/eleventy-plugin-rss");
 
 module.exports = function(eleventyConfig) {
 		// Copy `img` and `css` folders to output
