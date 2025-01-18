@@ -18,7 +18,9 @@ h2,
 h3,
 h4,
 h5 {
-  font-family: "Times New Roman", cursive;
+  font-family: "IM Fell English", serif;
+  font-weight: 400;
+  font-style: normal;
   /**
    * Todo: Write why we use rem units and set them throughout the stylesheet
    * https://www.youtube.com/watch?v=N5wpD9Ov_To
@@ -27,7 +29,7 @@ h5 {
 }
 
 p {
-  font-family: "Open Sans", sans-serif;
+  font-family: "Lato", sans-serif;
   margin-bottom: .75rem;
 }
 
@@ -131,7 +133,8 @@ footer p {
 }
 
 #comicPage::after, #comicPage::before,
-.authorNotes::after, .authorNotes::before {
+.authorNotes::after, .authorNotes::before,
+.subPage::after, .subPage::before {
   content: "";
   position: absolute;
   height: 20px;
@@ -142,13 +145,15 @@ footer p {
 }
 
 #comicPage::before,
-.authorNotes::before {
+.authorNotes::before,
+.subPage::before {
   transform: scaleY(-1);
   bottom: 100%;
 }
 
 #comicPage::after,
-.authorNotes::after {
+.authorNotes::after,
+.subPage::after {
   top: 100%;
 }
 
@@ -183,9 +188,9 @@ footer p {
   width: var(--pg-width);
   max-width: 98%;
   background-color: #ffffff;
-  outline: 3px solid #000000;
-  margin: 1rem auto 0;
+  margin: 3rem auto 0;
   padding: 0px 12px 12px;
+  position: relative;
 }
 
 .subPage:not(.archivePage) {
@@ -204,8 +209,7 @@ footer p {
 }
 .chapter h3 {
     margin: 0;
-    font-family: "Open Sans", sans-serif;
-    font-weight: 700;
+    font-family: "Lato", sans-serif;
 }
 
 /* character page */
