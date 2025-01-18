@@ -12,7 +12,7 @@ const { eleventyImageTransformPlugin } = require("@11ty/eleventy-img");
 const { feedPlugin } = require("@11ty/eleventy-plugin-rss");
 
 module.exports = function(eleventyConfig) {
-		eleventyConfig.setTemplateFormats("liquid", "njk");
+		eleventyConfig.setTemplateFormats("njk");
 		// Copy `img` and `css` folders to output
 		eleventyConfig.addPassthroughCopy("img");
 		eleventyConfig.addPassthroughCopy("css");
