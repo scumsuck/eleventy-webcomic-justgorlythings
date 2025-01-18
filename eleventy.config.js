@@ -12,7 +12,6 @@ const { eleventyImageTransformPlugin } = require("@11ty/eleventy-img");
 const { feedPlugin } = require("@11ty/eleventy-plugin-rss");
 
 module.exports = function(eleventyConfig) {
-		eleventyConfig.setTemplateFormats("njk");
 		// Copy `img` and `css` folders to output
 		eleventyConfig.addPassthroughCopy("img");
 		eleventyConfig.addPassthroughCopy("css");
@@ -22,24 +21,7 @@ module.exports = function(eleventyConfig) {
 			  loading: 'lazy'
 			}
 		});
-		eleventyConfig.addPlugin(feedPlugin, {
-			type: "rss", // or "rss", "json"
-			outputPath: "/feed.xml",
-			collection: {
-				name: "comic", // iterate over `collections.posts`
-				limit: 10,     // 0 means no limit
-			},
-			metadata: {
-				language: "en",
-				title: "Blog Title",
-				subtitle: "This is a longer description about your blog.",
-				base: "https://babayagacomic.netlify.app/",
-				author: {
-					name: "Your Name",
-					email: "", // Optional
-				}
-			}
-		});
+		eleventyConfig.addPlugin(feedPlugin);
 		
 }
 
