@@ -21,7 +21,7 @@ module.exports = function(eleventyConfig) {
 			  loading: 'lazy'
 			}
 		});
-		eleventyConfig.addPlugin(feedPlugin);
+		eleventyConfig.addPlugin(pluginRss);
 		
 }
 
