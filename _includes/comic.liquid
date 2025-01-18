@@ -5,7 +5,7 @@ If you want to remove one of the navigation buttons, just remove one of the
 
 <div id="comicPage">
   {% for panel in images %}
-    <img src="{{ panel }}" alt="{{ alt }}">
+    <img src="{{ panel }}" alt="{{ alt }}" eleventy:ignore>
   {% endfor %}
 </div>
 
