@@ -18,7 +18,7 @@ h2,
 h3,
 h4,
 h5 {
-  font-family: "Cherry Cream Soda", cursive;
+  font-family: "Times New Roman", cursive;
   /**
    * Todo: Write why we use rem units and set them throughout the stylesheet
    * https://www.youtube.com/watch?v=N5wpD9Ov_To
@@ -54,7 +54,7 @@ p {
 
 /* universal background color */
 body {
-  background-color: #da5437;
+  background-color: #f1ece4;
 }
 
 /* link colors */
@@ -79,13 +79,13 @@ header {
 header img {
   width: 500px;
   max-width: 98%;
+  margin-top: 20px;
 }
 header nav {
-  background-color: #ffffff;
-  outline: 3px solid #000000;
   font-size: 20px;
   width: 98%;
   margin: auto;
+  margin-top: 20px;
   text-align: center;
 }
 
@@ -119,12 +119,37 @@ footer p {
 
 /* style comic page image */
 #comicPage {
-  margin: 0 auto;
+  margin: 3% auto;
   /**
    * Here is our first example of calling a CSS variable, using the `var()`
    * property to call `--pg-width`!
    */
   width: var(--pg-width);
+  position: relative;
+  padding: 20px;
+  background-color: #ffffff;
+}
+
+#comicPage::after, #comicPage::before,
+.authorNotes::after, .authorNotes::before {
+  content: "";
+  position: absolute;
+  height: 20px;
+  width: 100%;
+  left: 0;
+  background: url(/img/papertear.svg) bottom;
+  background-size: var(--pg-width);
+}
+
+#comicPage::before,
+.authorNotes::before {
+  transform: scaleY(-1);
+  bottom: 100%;
+}
+
+#comicPage::after,
+.authorNotes::after {
+  top: 100%;
 }
 
 /* style nav button images */
@@ -143,12 +168,13 @@ footer p {
 /* style author notes */
 .authorNotes {
   background-color: #ffffff;
-  outline: 3px solid #000000;
   margin: auto;
   padding: 3px;
   padding-top: 0px;
   width: var(--pg-width);
   font-size: 1.125rem;
+  position: relative;
+  padding: 2% 3%;
 }
 
 /* SUBPAGES */

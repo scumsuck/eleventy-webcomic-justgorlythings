@@ -14,14 +14,15 @@
         | {{ title }}
       {% endif %}
     </title>
+    <link rel="icon" 
+      type="image/png" 
+      href="/img/favicon.png">
     <link href="/css/style.css"
       rel="stylesheet"
       type="text/css"
       media="all" />
     <!-- Fonts are sourced from Google Fonts (https://fonts.google.com/) -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <!-- Cherry Cream Soda -->
-    <link href="https://fonts.googleapis.com/css2?family=Cherry+Cream+Soda&display=swap" rel="stylesheet">
     <!-- Open Sans -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
   </head>
@@ -35,7 +36,7 @@
     {% endcomment %}
     <main>
       <!-- Delete this message -->
-      <div class="subPage">
+      <!-- <div class="subPage">
         <h2>Hold up!</h2>
         <p>This site isn't
           <em>actually</em>
@@ -59,7 +60,7 @@
           <li>Delete this message from
             <code>_includes/layouts/base.liquid</code>.</li>
         </ol>
-      </div>
+      </div> -->
       <!-- Stop deleting -->
 
       {{ content }}
