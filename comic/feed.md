@@ -21,7 +21,7 @@ layout: "layouts/feed.liquid"
     <link href="{{metadata.baseUrl}}{{ post.url}}"/>
     <updated>{{ post.date | dateToRfc3339 }}</updated>
     <id>{{metadata.baseUrl}}{{ post.url}}</id>
-    <content type="html"><![CDATA[ <img src="{{ post.data.images[0] }}" width="100" alt="Thumbnail for {{ post.data.title }}"/> ]]>{{ post.content | xml_escape }}</content>
+    <content type="html"><![CDATA[ <img src="{{ post.data.images[0] }}" width="100" alt="Thumbnail for {{ post.data.title }}"/> {{ post.content }}]]></content>
   </entry>
   {%- endfor %}
 </feed>
