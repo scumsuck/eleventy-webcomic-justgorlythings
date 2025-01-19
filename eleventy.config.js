@@ -10,6 +10,7 @@
 
 const { eleventyImageTransformPlugin } = require("@11ty/eleventy-img");
 const pluginRss = require("@11ty/eleventy-plugin-rss");
+const xmlFiltersPlugin = require("eleventy-xml-plugin");
 
 module.exports = function(eleventyConfig) {
 		// Copy `img` and `css` folders to output
@@ -23,6 +24,7 @@ module.exports = function(eleventyConfig) {
 		});
 		eleventyConfig.addLiquidFilter("dateToRfc3339", pluginRss.dateToRfc3339);
 		eleventyConfig.addLiquidFilter("getNewestCollectionItemDate", pluginRss.getNewestCollectionItemDate);
+		eleventyConfig.addPlugin(xmlFiltersPlugin);
 }
 
 

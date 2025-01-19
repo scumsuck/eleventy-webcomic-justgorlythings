@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@11ty/eleventy-img": "^6.0.1",
-    "@11ty/eleventy-plugin-rss": "^2.0.3"
+    "@11ty/eleventy-plugin-rss": "^2.0.3",
+    "eleventy-xml-plugin": "^0.1.0"
   }
 }
