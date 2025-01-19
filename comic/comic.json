@@ -1,5 +1,4 @@
 {
     "tags": ["comic"],
-    "thumb": "/img/thumbs/default.png",
     "layout": "layouts/strip.liquid"
 }
