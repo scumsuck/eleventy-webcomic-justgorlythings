@@ -16,7 +16,7 @@ module.exports = function(eleventyConfig) {
 		eleventyConfig.addPassthroughCopy("img");
 		eleventyConfig.addPassthroughCopy("css");
 		eleventyConfig.addPlugin(eleventyImageTransformPlugin, {
-			widths: [100, "auto"], // I moved the explicit widths over from my old shortcode
+			widths: [100, "auto"], 
 			defaultAttributes: {
 			  loading: 'lazy'
 			}

@@ -20,9 +20,11 @@ Liquid file within the template.
   {% render 'comic.liquid', collection: collections.comic, page: page, images: images, alt: alt %}
 </div>
 {%# If we have author notes, include them %}
-{% unless content == "" %}
-  <div class="authorNotes">
-    <h1>{{ title }}</h1>
-    {{ content }}
-  </div>
-{% endunless %}
+<div class="authorNotes">
+  {% unless content == "" %}
+      <h1>{{ title }}</h1>
+      <p>posted on {{page.date |date: "%b %d, %Y"}}</p>
+      {{ content }}
+  {% endunless %}
+</div>
+
