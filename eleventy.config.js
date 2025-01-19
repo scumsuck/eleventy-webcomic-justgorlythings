@@ -23,8 +23,6 @@ module.exports = function(eleventyConfig) {
 		});
 		eleventyConfig.addLiquidFilter("dateToRfc3339", pluginRss.dateToRfc3339);
 		eleventyConfig.addLiquidFilter("getNewestCollectionItemDate", pluginRss.getNewestCollectionItemDate);
-		eleventyConfig.addLiquidFilter("absoluteUrl", pluginRss.absoluteUrl);
-		
 }
 
 

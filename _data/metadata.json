@@ -1,3 +1,7 @@
 {
-	"title": "The Death of Baba Yaga"
+	"title": "The Death of Baba Yaga",
+	"baseUrl": "https://babayagacomic.netlify.app",
+	"summary": "A gothic western retelling of the myth of Baba Yaga",
+	"author": "Kate Drwecka",
+	"authorEmail": "katedrwecka@gmail.com"
 }
