@@ -127,9 +127,7 @@ footer p {
   background-color: #ffffff;
 }
 
-#comicPage::after, #comicPage::before,
-.authorNotes::after, .authorNotes::before,
-.subPage::after, .subPage::before {
+.paperDiv::before, .paperDiv::after {
   content: "";
   position: absolute;
   height: 20px;
@@ -139,16 +137,12 @@ footer p {
   background-size: var(--pg-width);
 }
 
-#comicPage::before,
-.authorNotes::before,
-.subPage::before {
+.paperDiv::before {
   transform: scaleY(-1);
   bottom: 100%;
 }
 
-#comicPage::after,
-.authorNotes::after,
-.subPage::after {
+.paperDiv::after {
   top: 100%;
 }
 

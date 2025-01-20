@@ -3,7 +3,7 @@ If you want to remove one of the navigation buttons, just remove one of the
 `render` tags!
 {% endcomment %}
 
-<div id="comicPage">
+<div id="comicPage" class="paperDiv">
   {% for panel in images %}
     <img src="{{ panel }}" alt="{{ alt }}" eleventy:ignore>
   {% endfor %}

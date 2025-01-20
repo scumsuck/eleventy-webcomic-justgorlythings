@@ -14,7 +14,7 @@ For more information on collections, see https://www.11ty.dev/docs/collections/
 <script>
     function changePage(slug){
         if (slug != "") {
-            window.location.href='http://localhost:8080'+slug;
+            window.location.href='{{metadata.base}}'+slug;
         }
 
         return;
