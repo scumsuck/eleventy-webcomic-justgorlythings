@@ -15,6 +15,7 @@ module.exports = function(eleventyConfig) {
 		// Copy `img` and `css` folders to output
 		eleventyConfig.addPassthroughCopy("img");
 		eleventyConfig.addPassthroughCopy("css");
+		eleventyConfig.addPassthroughCopy("js");
 		eleventyConfig.addPlugin(eleventyImageTransformPlugin, {
 			widths: [100, "auto"], 
 			defaultAttributes: {
