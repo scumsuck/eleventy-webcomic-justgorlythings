@@ -198,7 +198,8 @@ function getComments() {
 
         // Need index of page column for checking if comments are for the right page
         const isPage = (col) => col.label == 'Page';
-        let pageIdx = json.table.cols.findIndex(isPage);
+        // let pageIdx = json.table.cols.findIndex(isPage);
+        let pageIdx = 4;
         
         // Turn that data into usable comment data
         // All of the messy val checks are because Google Sheets can be weird sometimes with comment deletion
@@ -207,7 +208,7 @@ function getComments() {
             for (r = 0; r < json.table.rows.length; r++) {
                 // Check for null rows
                 let val1;
-                if (!json.table.rows[r].c[pageIdx]) {val1 = ''}
+                if (!json.table.rows[r].c[pageIdx]) {console.log('heeeere'); val1 = ''}
                 else {val1 = json.table.rows[r].c[pageIdx].v}
 
                 // Check if the page name matches before adding to comment array
@@ -262,7 +263,7 @@ function displayComments(comments) {
     // Get all reply comments by taking them out of the comment array
     let replies = [];
     for (i = 0; i < comments.length; i++) {
-        if (comments[i].Reply) {
+        if (comments[i]['Reply ']) {
             replies.push(comments[i]);
             comments.splice(i, 1);
             i--;
@@ -299,7 +300,7 @@ function displayComments(comments) {
     // Replies
     for (i = 0; i < replies.length; i++) {
         let reply = createComment(replies[i]);
-        const parentId = replies[i].Reply;
+        const parentId = replies[i]['Reply '];
         const parentDiv = document.getElementById(parentId);
 
         // Check if a container doesn't already exist for this comment, if not, make one
@@ -357,7 +358,7 @@ function displayComments(comments) {
 // Create basic HTML comment, reply or not
 function createComment(data) {
     let comment = document.createElement('div');
-
+    console.log(data);
     // Get the right timestamps
     let timestamps = convertTimestamp(data.Timestamp);
     let timestamp;
@@ -365,12 +366,12 @@ function createComment(data) {
     else {timestamp = timestamps[1]}
 
     // Set the ID (uses Name + Full Timestamp format)
-    const id = data.Name + '|--|' + data.Timestamp2;
+    const id = data['Name '] + '|--|' + data.Timestamp2;
     comment.id = id;
 
     // Name of user
     let name = document.createElement('h3');
-    let filteredName = data.Name;
+    let filteredName = data['Name '];
     if (s_wordFilterOn) {filteredName = filteredName.replace(v_filteredWords, s_filterReplacement)}
     name.innerText = filteredName;
     name.className = 'c-name';
@@ -383,17 +384,17 @@ function createComment(data) {
     comment.appendChild(time);
 
     // Website URL, if one was provided
-    if (data.Website) {
+    if (data['Website ']) {
         let site = document.createElement('a');
         site.innerText = s_websiteText;
-        site.href = data.Website;
+        site.href = data['Website '];
         site.className = 'c-site';
         comment.appendChild(site);
     }
 
     // Text content
     let text = document.createElement('p');
-    let filteredText = data.Text;
+    let filteredText = data['Text '];
     if (s_wordFilterOn) {filteredText = filteredText.replace(v_filteredWords, s_filterReplacement)}
     text.innerText = filteredText;
     text.className = 'c-text';
