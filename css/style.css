@@ -109,11 +109,6 @@ footer p {
 }
 
 /* COMIC */
-
-.comic {
-  margin-bottom: 2rem;
-}
-
 .comic h1 {
   text-align: center;
   margin: 1rem 0;
@@ -121,7 +116,7 @@ footer p {
 
 /* style comic page image */
 #comicPage {
-  margin: 3% auto;
+  margin: 3% auto 0 auto;
   /**
    * Here is our first example of calling a CSS variable, using the `var()`
    * property to call `--pg-width`!
@@ -193,14 +188,10 @@ footer p {
   position: relative;
 }
 
-.subPage:not(.archivePage) {
-  text-align: center;
-}
-
 /* archive */
 .chapter {
   display: flex;
-  align-items: center;
+  align-items: ;
   gap: 1rem;
   margin-bottom: 0.25rem;
 }

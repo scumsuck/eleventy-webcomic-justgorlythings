@@ -23,7 +23,7 @@ Liquid file within the template.
 <div class="authorNotes">
   {% unless content == "" %}
       <h1>{{ title }}</h1>
-      <p>posted on {{page.date |date: "%b %d, %Y"}}</p>
+      <p>posted on {{page.date | date: "%b %d, %Y"}}</p>
       {{ content }}
   {% endunless %}
 </div>
