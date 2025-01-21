@@ -40,8 +40,7 @@ const s_maxLengthName = 16; // The max character length of a name
 const s_commentsOpen = true; // Change to false if you'd like to close your comment section site-wide (Turn it off on Google Forms too!)
 const s_collapsedReplies = true; // True for collapsed replies with a button, false for replies to display automatically
 const s_longTimestamp = false; // True for a date + time, false for just the date
-let s_includeUrlParameters = false; // Makes new comment sections on pages with URL parameters when set to true (If you don't know what this does, leave it disabled)
-const s_fixRarebitIndexPage = false; // If using Rarebit, change to true to make the index page and page 1 of your webcomic have the same comment section
+const s_fixRarebitIndexPage = true; // If using Rarebit, change to true to make the index page and page 1 of your webcomic have the same comment section
 
 // Word filter - Censor profanity, etc
 const s_wordFilterOn = false; // True for on, false for off
@@ -71,9 +70,6 @@ const s_rightButtonText = '>>';
     Everything else is automatic, you don't have to change anything else. ^^
     However, feel free to edit this code as much as you like! Just please don't remove my credit if possible <3
 */
-
-// Fix the URL parameters setting for Rarebit just in case
-if (s_fixRarebitIndexPage) {s_includeUrlParameters = true}
 
 // Apply CSS
 const c_cssLink = document.createElement('link');
@@ -137,10 +133,13 @@ else {c_submitButton = document.createElement('button')}
 
 // Add invisible page input to document
 let v_pagePath = window.location.pathname;
-if (s_includeUrlParameters) {v_pagePath += window.location.search}
-if (s_fixRarebitIndexPage && v_pagePath == '/') {v_pagePath = '/?pg=1'}
+if (s_fixRarebitIndexPage && v_pagePath == '/' && document.currentScript) {
+    v_pagePath = document.currentScript.getAttribute('page-url');
+}
 const c_pageInput = document.createElement('input');
-c_pageInput.value = v_pagePath; c_pageInput.type = 'text'; c_pageInput.style.display = 'none';
+c_pageInput.value = v_pagePath; 
+c_pageInput.type = 'text'; 
+c_pageInput.style.display = 'none';
 c_pageInput.id = 'entry.' + s_pageId; c_pageInput.name = c_pageInput.id; 
 c_form.appendChild(c_pageInput);
 
@@ -208,7 +207,7 @@ function getComments() {
             for (r = 0; r < json.table.rows.length; r++) {
                 // Check for null rows
                 let val1;
-                if (!json.table.rows[r].c[pageIdx]) {console.log('heeeere'); val1 = ''}
+                if (!json.table.rows[r].c[pageIdx]) {val1 = ''}
                 else {val1 = json.table.rows[r].c[pageIdx].v}
 
                 // Check if the page name matches before adding to comment array
@@ -326,7 +325,7 @@ function displayComments(comments) {
             // The button to expand replies
             const button = document.createElement('button');
             button.innerHTML = s_expandRepliesText + ` (${num})`;
-            button.setAttribute('onclick', `expandReplies(this.parentElement.id)`);
+            button.setAttribute('onclick', `expandReplies(this, this.parentElement.id, ${num})`);
             button.className = 'c-expandButton';
             parentDiv.insertBefore(button, parentDiv.lastChild);
         }
@@ -358,7 +357,6 @@ function displayComments(comments) {
 // Create basic HTML comment, reply or not
 function createComment(data) {
     let comment = document.createElement('div');
-    console.log(data);
     // Get the right timestamps
     let timestamps = convertTimestamp(data.Timestamp);
     let timestamp;
@@ -492,10 +490,15 @@ function openReply(id) {
 }
 
 // Handle expanding replies (should only be accessible with collapsed replies enabled)
-function expandReplies(id) {
+function expandReplies(button, id, numOfReplies) {
     const targetDiv = document.getElementById(`${id}-replies`);
-    if (targetDiv.style.display == 'none') {targetDiv.style.display = 'block'}
-    else {targetDiv.style.display = 'none'}
+    if (targetDiv.style.display == 'none') {
+        targetDiv.style.display = 'block'
+        button.innerText = `Hide Replies (${numOfReplies})`;
+    } else {
+        targetDiv.style.display = 'none'
+        button.innerText = s_expandRepliesText + ` (${numOfReplies})`;
+    }
 }
 
 function changePage(dir) {
