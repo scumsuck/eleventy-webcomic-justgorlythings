@@ -1,4 +1,3 @@
-// quick test change to check if committing is working
 /*
     (PLEASE DO NOT DELETE THIS HEADER OR CREDIT!)
 
@@ -53,13 +52,13 @@ const s_filteredWords = [ // Add words to filter by putting them in quotes and s
 // Text - Change what messages/text appear on the form and in the comments section (Mostly self explanatory)
 const s_widgetTitle = 'Leave a comment!';
 const s_nameFieldLabel = 'Name';
-const s_websiteFieldLabel = 'Website (Optional)';
+const s_websiteFieldLabel = 'Website';
 const s_textFieldLabel = '';
 const s_submitButtonLabel = 'Submit';
 const s_loadingText = 'Loading comments...';
 const s_noCommentsText = 'No comments yet!';
 const s_closedCommentsText = 'Comments are closed temporarily!';
-const s_websiteText = 'Website'; // The links to websites left by users on their comments
+const s_websiteText = ' | 🔗 Website'; // The links to websites left by users on their comments
 const s_replyButtonText = 'Reply'; // The button for replying to someone
 const s_replyingText = 'Replying to'; // The text that displays while the user is typing a reply
 const s_expandRepliesText = 'Show Replies';
@@ -95,12 +94,13 @@ const v_formHtml = `
     </div>
 
     <div id="c_websiteWrapper" class="c-inputWrapper">
-        <label class="c-label c-websiteLabel" for="entry.${s_websiteId}">${s_websiteFieldLabel}</label>
+        <label class="c-label c-websiteLabel" for="entry.${s_websiteId}">${s_websiteFieldLabel} <span>(Optional)</span></label>
         <input class="c-input c-websiteInput" name="entry.${s_websiteId}" id="entry.${s_websiteId}" type="url" pattern="https://.*">
     </div>
 
     <div id="c_textWrapper" class="c-inputWrapper">
         <label class="c-label c-textLabel" for="entry.${s_textId}">${s_textFieldLabel}</label>
+        <span id="c_replyingText"></span>
         <textarea class="c-input c-textInput" name="entry.${s_textId}" id="entry.${s_textId}" rows="4" cols="50"  maxlength="${s_maxLength}" required></textarea>
     </div>
 
@@ -145,10 +145,8 @@ c_pageInput.id = 'entry.' + s_pageId; c_pageInput.name = c_pageInput.id;
 c_form.appendChild(c_pageInput);
 
 // Add the "Replying to..." text to document
-let c_replyingText = document.createElement('span');
+let c_replyingText = document.getElementById('c_replyingText');
 c_replyingText.style.display = 'none'; c_replyingText.id = 'c_replyingText';
-c_form.appendChild(c_replyingText);
-c_replyingText = document.getElementById('c_replyingText');
 
 // Add the invisible reply input to document
 let c_replyInput = document.createElement('input');
@@ -376,12 +374,6 @@ function createComment(data) {
     name.className = 'c-name';
     comment.appendChild(name);
 
-    // Timestamp
-    let time = document.createElement('span');
-    time.innerText = timestamp;
-    time.className = 'c-timestamp';
-    comment.appendChild(time);
-
     // Website URL, if one was provided
     if (data['Website ']) {
         let site = document.createElement('a');
@@ -390,6 +382,12 @@ function createComment(data) {
         site.className = 'c-site';
         comment.appendChild(site);
     }
+
+    // Timestamp
+    let time = document.createElement('span');
+    time.innerText = timestamp;
+    time.className = 'c-timestamp';
+    comment.appendChild(time);
 
     // Text content
     let text = document.createElement('p');

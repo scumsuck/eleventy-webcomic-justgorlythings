@@ -23,8 +23,10 @@ individual collections to use within templates.
   <div class="authorNotes paperDiv">
     <h1>{{ latest.data.title }}</h1>
     {{ latest.content }}
-    {% comment %} {{ latest.url | log }} we can pass this if we refactor the forms a bit {% endcomment %}
-    <div id="c_widget"></div>
-    <script src="/js/comment-widget.js" page-url={{ latest.url }}></script>
   </div>
 {% endunless %}
+
+<div class="paperDiv commentForm">
+  <div id="c_widget"></div>
+  <script src="/js/comment-widget.js"></script>
+</div>

@@ -11,27 +11,25 @@
 
 #c_widget button, #c_widget input[type=submit] {
     padding: 4px;
-    font-family: 'Lato', sans-serif;
+    font-family: 'IM Fell English', serif;
     text-decoration: none;
 	text-align: center;
+}
+
+#c_widget input[type=submit] {
     text-transform: uppercase;
 }
 
 #c_widget button:hover, #c_widget input[type=submit]:hover {
-    /* color: white;
-    border: 1px solid #B766FF; */
+    opacity: 0.8;
 }
+
 #c_widget button:disabled, #c_widget input[type=submit]:disabled {opacity: 60%;}
-#c_widget button:disabled:hover, #c_widget input[type=submit]:disabled:hover {
-    /* color: #B766FF;
-    border: 1px solid white; */
-}
 
 /* Input section */
 #c_inputDiv {
     margin-bottom: 15px;
-    padding: 10px;
-    border: 2px solid white;
+    padding: 10px 10px 10px 0;
 }
 
 #c_widgetTitle {
@@ -41,12 +39,25 @@
     text-transform: uppercase;
     font-style: italic;
     font-weight: bold;
-    text-align: right;
 }
 
 .c-inputWrapper {
     display: block;
-    text-align: right;
+}
+
+#c_nameWrapper, #c_websiteWrapper {
+    display: inline-block;
+}
+
+.c-label {
+    display: block;
+    font-family: 'IM Fell English', serif;
+    text-transform: uppercase;
+}
+.c-websiteLabel span {
+    text-transform: lowercase;
+    opacity: 0.7;
+    font-size: 0.9rem;
 }
 .c-input {
     padding: 4px;
@@ -60,24 +71,20 @@
     max-width: 900px;
     resize: none;
 }
-#c_submitButton {
-    display: block; 
-    margin-left: auto; 
-    margin-right: 0;
-}
+
 #c_replyingText {
     color: #222;
-    text-align: right;
 }
 
 /* Comment section */
 .c-comment {
     margin-bottom: 15px;
-    padding: 10px;
+    border-left: 3px solid #d2d2d2;
+    padding: 0 0 0 15px;
 }
 .c-reply {
     display: block;
-    width: 90%;
+    width: 97%;
     margin-bottom: 10px;
     margin-left: auto;
     margin-right: 0;
@@ -93,19 +100,22 @@
 .c-name {
     display: inline-block;
     margin: 0;
-    margin-right: 10px;
+    margin-right: 5px;
     padding: 0;
-    text-transform: uppercase;
     font-weight: bold;
+    font-size: 1rem;
 }
+
 .c-site {
-    text-transform: uppercase;
     text-decoration: none;
+    font-size: 0.75rem;
+    text-transform: uppercase;
 }
 
 .c-timestamp {
-    float: right;
     opacity: 75%;
+    font-size: 0.7rem;
+    display: block;
 }
 .c-text {
     margin: 0;
@@ -113,21 +123,27 @@
     margin-right: -10px;
     padding: 10px;
     font-family: 'Lato', sans-serif;
-    font-size: 14px;
+    font-size: 1rem;
     text-align: justify;
     color: #222;
 }
 
 /* Pagination */
 #c_pagination {text-align: center;}
-.c-replyButton {
-    margin-top: 10px;
-    margin-right: 4px;
-}
+.c-replyButton,
 .c-expandButton {
     margin-top: 10px;
-    margin-left: 4px;
+    margin-right: 4px;
+    background: none!important;
+    border: none;
+    padding: 0!important;
+    cursor: pointer;
 }
+
+.c-expandButton {
+    margin-left: 30px;
+}
+
 .c-paginationButton {
     margin-right: 4px;
     margin-left: 4px;
