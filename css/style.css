@@ -66,7 +66,7 @@ body {
 
 /* link colors */
 a {
-  color: #000000;
+  color: #222;
 }
 a:hover {
   color: #da5437;
@@ -124,11 +124,7 @@ footer p {
 
 /* style comic page image */
 #comicPage {
-  margin: 3% auto 0 auto;
-  /**
-   * Here is our first example of calling a CSS variable, using the `var()`
-   * property to call `--pg-width`!
-   */
+  margin: 3rem auto 0 auto;
   width: var(--pg-width);
   padding: 20px;
 }
@@ -179,6 +175,17 @@ footer p {
   width: var(--pg-width);
   font-size: 1.125rem;
   padding: 2% 3%;
+}
+
+.authorNotes h1 {
+  margin-bottom: 0;
+}
+
+.authorNotes-date {
+  color: #4f4f47;
+  font-size: 0.9rem;
+  margin-top: -5px;
+  margin-bottom: 1rem;
 }
 
 /* SUBPAGES */
