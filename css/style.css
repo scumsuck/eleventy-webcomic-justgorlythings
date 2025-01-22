@@ -33,6 +33,11 @@ p {
   margin-bottom: .75rem;
 }
 
+/* This is to offset some weird height stuff with eleventy img */
+img {
+  height: auto;
+}
+
 /* GLOBAL */
 
 /**
@@ -77,18 +82,21 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: var(--pg-width);
+  margin: 2rem auto 0 auto;
 }
 header img {
-  width: 500px;
-  max-width: 98%;
-  margin-top: 20px;
+  width: 100%;
+  max-width: 600px;
 }
 header nav {
   font-size: 20px;
   width: 98%;
-  margin: auto;
-  margin-top: 20px;
+  margin-top: 1rem;
   text-align: center;
+  border: solid #4f4f47;
+  border-width: 1px 0;
+  padding: 10px;
 }
 
 /* FOOTER */
@@ -156,7 +164,7 @@ footer p {
   flex-wrap: nowrap;
   align-items: center;
   justify-content: center;
-  padding: 10px 0px;
+  padding: 60px 0px;
   gap: 10px;
 }
 .comicNav img {
