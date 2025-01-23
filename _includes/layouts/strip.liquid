@@ -17,13 +17,13 @@ As a quick rundown for how this file works, we use the `unless` tag to display
 content depending on if we have data, and the `render` tag includes another
 Liquid file within the template.
 {% endcomment %}<div class="comic">
-  {% render 'comic.liquid', collection: collections.comic, page: page, images: images, alt: alt %}
+  {% render 'comic.liquid', collection: collections.comic, page: page, images: images, alt: alt, date: date %}
 </div>
 {%# If we have author notes, include them %}
 <div class="authorNotes paperDiv">
   {% unless content == "" %}
       <h1>{{ title }}</h1>
-      <p class="authorNotes-date">posted on {{page.date | date: "%b %d, %Y"}}</p>
+      <p class="authorNotes-date">posted on {{ date | date: "%b %d, %Y" }}</p>
       {{ content }}
   {% endunless %}
 </div>

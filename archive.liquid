@@ -30,6 +30,9 @@ For more information on collections, see https://www.11ty.dev/docs/collections/
 {% assign chapters = collections | chapters %}
 
 {% for item in chapters -%}
-    <h2>Chapter {{item | slice: -1, 1}}</h2>
-    {% render 'chapter.liquid', thumbnails: false, collection: collections[item] %}
+    <div class="chapter-container">
+
+        <img src="{{ collections[item][0].data.images[0] }}" alt="Thumbnail for Chapter">
+        {% render 'chapter.liquid', thumbnails: false, collection: collections[item] %}
+    </div>
 {%- endfor %}

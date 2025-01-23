@@ -65,6 +65,19 @@ const s_expandRepliesText = 'Show Replies';
 const s_leftButtonText = '<<';
 const s_rightButtonText = '>>';
 
+/* 
+    Key values - likely you don't have to change these, but there's a small chance.
+    I found in my case Google Forms added a space after my question text, so that's what I've included here
+    If all your comments show "undefined", likely Forms didn't add a space for you, so all you need to do is remove the trailing space
+    ex 'Name ' => 'Name'
+    Otherwise, make sure the capitalization is the same :)
+*/
+
+const s_nameKey = 'Name ';
+const s_websiteKey = 'Website ';
+const s_textKey = 'Text ';
+const s_replyKey = 'Reply ';
+
 /*
     DO NOT edit below this point unless you are confident you know what you're doing!
     Everything else is automatic, you don't have to change anything else. ^^
@@ -261,7 +274,7 @@ function displayComments(comments) {
     // Get all reply comments by taking them out of the comment array
     let replies = [];
     for (i = 0; i < comments.length; i++) {
-        if (comments[i]['Reply ']) {
+        if (comments[i][s_replyKey]) {
             replies.push(comments[i]);
             comments.splice(i, 1);
             i--;
@@ -363,22 +376,22 @@ function createComment(data) {
     else {timestamp = timestamps[1]}
 
     // Set the ID (uses Name + Full Timestamp format)
-    const id = data['Name '] + '|--|' + data.Timestamp2;
+    const id = data[s_nameKey] + '|--|' + data.Timestamp2;
     comment.id = id;
 
     // Name of user
     let name = document.createElement('h3');
-    let filteredName = data['Name '];
+    let filteredName = data[s_nameKey];
     if (s_wordFilterOn) {filteredName = filteredName.replace(v_filteredWords, s_filterReplacement)}
     name.innerText = filteredName;
     name.className = 'c-name';
     comment.appendChild(name);
 
     // Website URL, if one was provided
-    if (data['Website ']) {
+    if (data[s_websiteKey]) {
         let site = document.createElement('a');
         site.innerText = s_websiteText;
-        site.href = data['Website '];
+        site.href = data[s_websiteKey];
         site.className = 'c-site';
         comment.appendChild(site);
     }
@@ -391,7 +404,7 @@ function createComment(data) {
 
     // Text content
     let text = document.createElement('p');
-    let filteredText = data['Text '];
+    let filteredText = data[s_textKey];
     if (s_wordFilterOn) {filteredText = filteredText.replace(v_filteredWords, s_filterReplacement)}
     text.innerText = filteredText;
     text.className = 'c-text';

@@ -18,7 +18,7 @@
       <title>{{ post.data.title }}</title>
       <link>{{ absolutePostUrl }}</link>
       <description><![CDATA[ <img src="{{ post.data.images[0] | htmlBaseUrl(metadata.base) }}" width="100" alt="Thumbnail for {{ post.data.title }}"/> ]]>{{ post.content | renderTransforms(post.data.page, metadata.base) }}</description>
-      <pubDate>{{ post.date | dateToRfc822 }}</pubDate>
+      <pubDate>{{ post.data.date | dateToRfc822 }}</pubDate>
       <dc:creator>{{ metadata.author }}</dc:creator>
       <guid>{{ absolutePostUrl }}</guid>
     </item>

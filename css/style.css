@@ -57,19 +57,38 @@ img {
    * properties, check out Kevin Powell's video: https://youtu.be/U9VF-4euyRo
    */
   --pg-width: min(64rem, 90%);
+
+  /**
+  * The following is variables that set colours for things on the site.
+  * If you just want to swap some colours, likely this is all you have to touch.
+  **/
+  /* universal background color */
+  --bg-color: #f1ece4;
+  /* the colour of links */
+  --link-color: #222;
+  /* link colours when hovered over */
+  --link-color-hover: #da5437;
+  --text-color: #222;
+
+   /**
+  * I recommend not changing this, UNLESS you are getting rid of the paper tear effect
+  * If you DON'T want the paper tear effect remove from PAPER TEAR BEGIN to PAPER TEAR END
+  * Roughly lines 149-172 of this file, although that might move a bit as things get added.
+  **/
+  --content-bg: #fff;
 }
 
-/* universal background color */
+
 body {
-  background-color: #f1ece4;
+  background-color: var(--bg-color);
 }
 
 /* link colors */
 a {
-  color: #222;
+  color: var(--link-color);
 }
 a:hover {
-  color: #da5437;
+  color: var(--link-color-hove);
 }
 
 /* HEADER */
@@ -85,10 +104,7 @@ header {
   width: var(--pg-width);
   margin: 2rem auto 0 auto;
 }
-header img {
-  width: 100%;
-  max-width: 600px;
-}
+
 header nav {
   font-size: 20px;
   width: 98%;
@@ -102,7 +118,7 @@ header nav {
 /* FOOTER */
 
 footer {
-  color: #421a1a;
+  color: var(--text-color);
   margin-top: 2rem;
   margin-bottom: 1rem;
   display: flex;
@@ -129,12 +145,14 @@ footer p {
   padding: 20px;
 }
 
+/* Don't remove this bit though */
 .paperDiv {
-  background: #fff;
+  background: var(--content-bg);
   position: relative;
   width: var(--pg-width);
 }
 
+/* PAPER TEAR BEGIN - start removing here if you don't want the paper effect */
 .paperDiv::before, .paperDiv::after {
   content: "";
   position: absolute;
@@ -153,6 +171,7 @@ footer p {
 .paperDiv::after {
   top: 100%;
 }
+/* PAPER TEAR END - stop removing here */
 
 /* style nav button images */
 .comicNav {
@@ -194,7 +213,7 @@ footer p {
   width: var(--pg-width);
   max-width: 98%;
   margin: 3rem auto 0;
-  padding: 0px 12px 12px;
+  padding: 1rem 3rem 2rem;
 }
 
 /* archive */
@@ -207,42 +226,31 @@ footer p {
     margin: 0;
     font-family: "Lato", sans-serif;
 }
-
+.chapter-container img {
+  max-width: 200px;
+}
 /* character page */
-.characters {
+.character {
   /**
    * For those unfamiliar with grid, check out this CSS Tricks article:
    * https://css-tricks.com/snippets/css/complete-guide-grid/
    */
   display: grid;
-  grid-template-columns: 1fr 3fr;
+  grid-template-columns: 20% 60%;
   gap: 1rem;
+  margin: 1rem auto 2rem;
 }
-.characters div {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+
+.character h2 {
+  margin-bottom: 0;
 }
-.characters img {
+
+.character h2 {
+  margin-bottom: 0;
+}
+
+.character picture,
+.character img {
   width: 100%;
-}
-
-/* message box */
-
-ol,
-ul {
-  width: max(24rem, 60%);
-  margin-inline: auto;
-}
-
-li {
-  font-family: "Open Sans", sans-serif;
-  margin-bottom: .25rem;
-  text-align: left;
-}
-
-
-.commentForm {  
-  margin: 5rem auto;
+  max-width: 150px;
 }

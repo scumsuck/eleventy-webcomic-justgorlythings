@@ -23,6 +23,10 @@ module.exports = function(eleventyConfig) {
 			}
 		});
 		eleventyConfig.addPlugin(pluginRss);
+		eleventyConfig.addLiquidFilter("utcDate", function(value) { 
+			const utc= (new Date(value)).toUTCString().split(' ');
+			return `${utc[2]} ${utc[1]}, ${utc[3]}`;
+		});
 		eleventyConfig.addAsyncFilter("chapters", async function(collections) { 
 			return Object.keys(collections).filter(function (propertyName) {
 				if (propertyName.indexOf("chapter") === 0){
