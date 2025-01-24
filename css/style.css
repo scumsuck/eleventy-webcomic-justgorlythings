@@ -145,6 +145,11 @@ footer p {
   padding: 20px;
 }
 
+#comicPage img {
+  display: block;
+  margin: 0 auto;
+}
+
 /* Don't remove this bit though */
 .paperDiv {
   background: var(--content-bg);
@@ -216,24 +221,15 @@ footer p {
   padding: 1rem 3rem 2rem;
 }
 
-/* archive */
-.chapter {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 0.25rem;
-}
-.chapter h3 {
-    margin: 0;
-    font-family: "Lato", sans-serif;
-}
-.chapter-container img {
-  max-width: 200px;
-}
+
 /* character page */
-.character {
+.character,
+.chapter-container {
   /**
    * For those unfamiliar with grid, check out this CSS Tricks article:
    * https://css-tricks.com/snippets/css/complete-guide-grid/
+   *
+   * This is also being applied to the archive layout
    */
   display: grid;
   grid-template-columns: 20% 60%;
@@ -253,4 +249,23 @@ footer p {
 .character img {
   width: 100%;
   max-width: 150px;
+}
+
+/* archive */
+.chapter {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0.25rem;
+}
+.chapter h3 {
+    margin: 0;
+    font-family: "Lato", sans-serif;
+}
+.chapter-container { 
+  grid-template-columns: 20% 60%;
+}
+
+/* Comment Form */
+.commentForm {
+  margin: 5rem auto 0;
 }
