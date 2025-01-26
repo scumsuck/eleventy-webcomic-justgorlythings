@@ -1,17 +1,27 @@
+:root {
+    /**
+     * By now you should be a bit familiar with CSS variables from the main site styles
+     * (https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) 
+     */
+    --comment-title-font: 'IM Fell English', serif;
+    --comment-text-font: 'Lato', sans-serif;
+    --comment-text-color: #222;
+}
+
 /* Main */
 #c_widget {
     box-sizing: border-box;
     height: 100%;
     overflow: auto;
     padding: 20px;
-    font-family: 'Lato', sans-serif;
+    font-family: var(--comment-text-font);
     font-size: 16px;
-    color: #222;
+    color: var(--comment-text-color);
 }
 
 #c_widget button, #c_widget input[type=submit] {
     padding: 4px;
-    font-family: 'IM Fell English', serif;
+    font-family: var(--comment-title-font);
     text-decoration: none;
 	text-align: center;
 }
@@ -51,7 +61,7 @@
 
 .c-label {
     display: block;
-    font-family: 'IM Fell English', serif;
+    font-family: var(--comment-title-font);
     text-transform: uppercase;
 }
 .c-websiteLabel span {
@@ -61,10 +71,9 @@
 }
 .c-input {
     padding: 4px;
-    color: black;
+    color: var(--comment-text-color);
 	outline: none;
 }
-.c-input:focus {border: 1px solid #B766FF;}
 
 .c-textInput {
     width: calc(100% - 10px);
@@ -73,7 +82,7 @@
 }
 
 #c_replyingText {
-    color: #222;
+    color: var(--comment-text-color);
 }
 
 /* Comment section */
@@ -122,10 +131,10 @@
     margin-left: -10px;
     margin-right: -10px;
     padding: 10px;
-    font-family: 'Lato', sans-serif;
+    font-family: var(--comment-text-font);
     font-size: 1rem;
     text-align: justify;
-    color: #222;
+    color: var(--comment-text-color);
 }
 
 /* Pagination */

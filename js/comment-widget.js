@@ -6,25 +6,38 @@
     The IDs at the top are a requirement but everything else is optional!
     Do not delete any settings even if you aren't using them! It could break the program.
 
-    After filling out your options, just paste this anywhere you want a comment section
-    (But change the script src URL to wherever you have this widget stored on your site!)
-
-        <div id="c_widget"></div>
-        <script src="comment-widget.js"></script>
-
     Have fun! Bug reports are encouraged if you happen to run into any issues.
     - Ayano (https://virtualobserver.moe/)
+
+    This code was originally created by Ayano and I have left their comment above. 
+    Though I've modified it a tiny bit for this template (adding the key bit, and checking for page-url on the script, as well as styling it more neutrally to seamlessly fit in with other sites faster).
+    
+    You will have to follow some slightly different steps, as outlined here:
+    https://webcomics.fyi/templates/adding-comments.html
+    
 */
 
 // The values in this section are REQUIRED for the widget to work! Keep them in quotes!
-const s_stylePath = '/css/comment-widget-dark.css';
-const s_formId = '1FAIpQLSf8AOrdNleqpmMrGyvcuFRukDlsM9SWZGZeV_k7fkcNsfdmpw';
-const s_nameId = '1989814818';
-const s_websiteId = '782364095';
-const s_textId = '1880846870';
-const s_pageId = '611439967';
-const s_replyId = '238526900';
-const s_sheetId = '1Sgd8yueA3DKveHvDgDambT2ZegDeNEslCjwzQHnCqbI';
+const s_stylePath = '/css/comment-widget.css';
+const s_formId = 'YOUR_FORM_ID_HERE';
+const s_nameId = 'NAME_ID_HERE';
+const s_websiteId = 'WEBSITE_ID_HERE';
+const s_textId = 'TEXT_ID_HERE';
+const s_pageId = 'PAGE_ID_HERE';
+const s_replyId = 'REPLY_ID_HERE';
+const s_sheetId = 'GOOGLE_SHEET_ID_HERE';
+
+/* 
+    Key values - likely you don't have to change these, but there's a small chance.
+    I found in my case Google Forms added a space after my question text, so that's what I've included here
+    If all your comments show "undefined", likely Forms didn't add a space for you, so all you need to do is remove the trailing space
+    ex 'Name ' => 'Name'
+    Otherwise, make sure the capitalization is the same :)
+*/
+const s_nameKey = 'Name ';
+const s_websiteKey = 'Website ';
+const s_textKey = 'Text ';
+const s_replyKey = 'Reply ';
 
 // The values below are necessary for accurate timestamps, I've filled it in with EST as an example
 const s_timezone = -5; // Your personal timezone (Example: UTC-5:00 is -5 here, UTC+10:30 would be 10.5)
@@ -64,19 +77,6 @@ const s_replyingText = 'Replying to'; // The text that displays while the user i
 const s_expandRepliesText = 'Show Replies';
 const s_leftButtonText = '<<';
 const s_rightButtonText = '>>';
-
-/* 
-    Key values - likely you don't have to change these, but there's a small chance.
-    I found in my case Google Forms added a space after my question text, so that's what I've included here
-    If all your comments show "undefined", likely Forms didn't add a space for you, so all you need to do is remove the trailing space
-    ex 'Name ' => 'Name'
-    Otherwise, make sure the capitalization is the same :)
-*/
-
-const s_nameKey = 'Name ';
-const s_websiteKey = 'Website ';
-const s_textKey = 'Text ';
-const s_replyKey = 'Reply ';
 
 /*
     DO NOT edit below this point unless you are confident you know what you're doing!

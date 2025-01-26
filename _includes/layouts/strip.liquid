@@ -28,9 +28,5 @@ Liquid file within the template.
   {% endunless %}
 </div>
 
-<div class="paperDiv commentForm">
-  <div id="c_widget"></div>
-  <script src="/js/comment-widget.js"></script>
-</div>
-  
+{% comment %} {% render 'comments.liquid' %}   {% endcomment %}
 
