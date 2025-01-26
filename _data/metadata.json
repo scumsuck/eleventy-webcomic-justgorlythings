@@ -1,8 +1,8 @@
 {
-	"title": "The Death of Baba Yaga",
-	"base": "https://babayagacomic.netlify.app",
-	"description": "A gothic western retelling of the myth of Baba Yaga",
-	"author": "Kate Drwecka",
+	"title": "Your comic name here",
+	"base": "https://example.com/",
+	"description": "You comic description here",
+	"author": "Your Name",
 	"authorEmail": "katedrwecka@gmail.com",
 	"language": "en"
 }

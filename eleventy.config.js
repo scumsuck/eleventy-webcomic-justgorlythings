@@ -33,8 +33,7 @@ module.exports = function(eleventyConfig) {
 					return propertyName;
 				}
 			});
-		});
-		
+		});		
 }
 
 

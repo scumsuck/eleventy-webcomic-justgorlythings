@@ -11,30 +11,33 @@ page a tag in its front matter, that tag becomes a collection you can point to
 
 For more information on collections, see https://www.11ty.dev/docs/collections/
 --><h2>Chronological Order</h2>
+
+{% comment %} if you don't want the dropdown page selection, start deleting from below... {% endcomment %}
 <script>
     function changePage(slug){
         if (slug != "") {
-            window.location.href='{{metadata.base}}'+slug;
+            window.location.pathname = slug;
         }
 
         return;
     }
 </script>
-<select name="comic" onchange="changePage(this.value)">
+<select class="archive-select" name="comic" onchange="changePage(this.value)">
     <option value="" disabled selected>Select a comic...</option>
     {% for item in collections.comic -%}
         <option value="{{ item.url }}">{{ item.date | date: "%b %d, %Y" }} - {{ item.data.title }}</option>
     {%- endfor %}
 </select>
+{% comment %} ...and stop deleting from above (so everything between these comments) {% endcomment %}
 
 {% assign chapters = collections | chapters %}
 
-{% for item in chapters -%}
-    <div class="chapter-container">
-        <img src="{{ collections[item][0].data.images[0] }}" alt="Thumbnail for Chapter">
-        <div class="chapter-text">
-            <h2>Chapter {{item | slice: -1, 1}}</h2>
-            {% render 'chapter.liquid', thumbnails: false, collection: collections[item] %}
-        </div>
-    </div>
-{%- endfor %}
+
+{% comment %} 
+TO DO: explain the options here
+{% endcomment %}
+{% render 'chapter.liquid', thumbnails: false, collection: collections chapters: chapters %}
+
+{% comment %} 
+{% render 'chapter.liquid', thumbnails: true, collection: collections %}
+{% endcomment %}

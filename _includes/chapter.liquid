@@ -4,14 +4,35 @@ actually is under the hood. Here, we're saying "For an item in a given
 collection, render out a `<div>` tag with its title, thumbnail, and a link to
 the page."
 {% endcomment %}
-{% for item in collection -%}
-  <div class="chapter">
-    {%# If `thumbnails` is true, display the page's thumbnail %}
-    {% if thumbnails -%}
-      <img src="{{ item.data.images[0] }}" width="100" alt="Thumbnail for {{ item.data.title }}">
-    {%- endif %}
-    <h3>
-      <a href="{{ item.url }}">{{ item.data.title }}</a>
-    </h3>
-  </div>
-{%- endfor %}
+
+{% if chapters %}
+  {% for chapter in chapters %}
+    <div class="chapter-container">
+        <img class="chapter-img" src="{{ collection[chapter][0].data.images[0] }}" alt="Thumbnail for Chapter">
+        <div class="chapter-text">
+            <h2>Chapter {{chapter | slice: -1, 1}}</h2>
+            {% for item in collection[chapter] %}
+              <div class="chapter">
+                <h3>
+                  <a href="{{ item.url }}">{{ item.data.title }}</a>
+                </h3>
+              </div>
+            {% endfor %}
+        </div>
+    </div>
+  {% endfor %}
+{% else %}
+  {% for item in collection.comic %}
+    <div class="chapter">
+      {%# If `thumbnails` is true, display the page's thumbnail %}
+      {% if thumbnails %}
+        <img src="{{ item.data.images[0] }}" width="100" alt="Thumbnail for {{ item.data.title }}">
+      {% endif %}
+      <h3>
+        <a href="{{ item.url }}">{{ item.data.title }}</a>
+      </h3>
+    </div>
+  {% endfor %}
+{% endif %}
+
+

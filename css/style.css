@@ -88,7 +88,7 @@ a {
   color: var(--link-color);
 }
 a:hover {
-  color: var(--link-color-hove);
+  color: var(--link-color-hover);
 }
 
 /* HEADER */
@@ -252,6 +252,10 @@ footer p {
 }
 
 /* archive */
+.archive-select {
+  width: min(400px, 98%);
+}
+
 .chapter {
   display: flex;
   gap: 1rem;
@@ -260,6 +264,9 @@ footer p {
 .chapter h3 {
     margin: 0;
     font-family: "Lato", sans-serif;
+}
+.chapter-img {
+  width: min(200px, 98%);
 }
 .chapter-container { 
   grid-template-columns: 20% 60%;
