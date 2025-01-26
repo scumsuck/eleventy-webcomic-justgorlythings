@@ -34,10 +34,9 @@ For more information on collections, see https://www.11ty.dev/docs/collections/
 
 
 {% comment %} 
-TO DO: explain the options here
+by default this is set to display by chapter. Chapter view only has the first chapter page, no thumbnails per page.
+If you would rather a list of just pages, remove chapters: chapters, below, and then set thumbnails to true or false depending on if you'd like each page to have a thumbnail
 {% endcomment %}
-{% render 'chapter.liquid', thumbnails: false, collection: collections chapters: chapters %}
+{% render 'chapter.liquid', thumbnails: false, chapters: chapters, collection: collections  %}
 
-{% comment %} 
-{% render 'chapter.liquid', thumbnails: true, collection: collections %}
-{% endcomment %}
+
