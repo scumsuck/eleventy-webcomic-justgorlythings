@@ -1,7 +1,7 @@
 {
 	"title": "Your comic name here",
-	"base": "https://example.com/",
-	"description": "You comic description here",
+	"base": "https://example.com",
+	"description": "Your comic description here",
 	"author": "Your Name",
 	"authorEmail": "katedrwecka@gmail.com",
 	"language": "en"
