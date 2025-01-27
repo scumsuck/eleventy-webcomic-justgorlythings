@@ -302,3 +302,11 @@ footer p {
     --pg-width: min(100%);
   }
 }
+
+.site-comment {
+  background: #cecece;
+}
+
+.site-comment div {
+  background: grey;
+}

@@ -1,4 +1,20 @@
-<div class="paperDiv commentForm">
-    <div id="c_widget"></div>
-    <script src="/js/comment-widget.js" {% if pageUrl %}page-url={{ pageUrl }} {% endif %}></script>
+<div class="paperDiv commentForm" id="commentsForm">
+    <p id="comment-reply-info"></p>
+    <form onsubmit="return postComment()">
+        <label for="comment-name">Name:</label><br>
+        <input type="text" id="comment-name" name="entry.1995103453" required><br><br>
+        
+        <label for="comment-comment">Comment:</label><br>
+        <textarea id="comment-comment" name="entry.1895795716" rows="4" cols="50"></textarea><br><br>
+        
+        <input type="text" id="comment-posturl" name="entry.1368438253" value={{ pageUrl }}><br><br>
+
+        <input type="text" id="comment-replies" name="entry.39824116"><br>
+        
+        <button id="comment-submit" type="submit">Submit</button>
+    </form>
+
+    <div id="comments"></div>
+    <button id="loadMoreComments" onclick="loadMoreComments()">Load More Comments</button>
 </div>
+<script src="/js/comment-widget-new.js" page-url={{ pageUrl }}></script>
