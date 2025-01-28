@@ -1,3 +1,4 @@
+const batchComments = false;
 const commentsToStart = 3;
 let commentsIndex = commentsToStart;
 const loadMoreCommentsButton = document.getElementById("loadMoreComments");
@@ -45,7 +46,6 @@ const sqlStatement = encodeURIComponent(`SELECT A, B, C, E, F WHERE D = '${thisP
 const sheetsUrl = `https://docs.google.com/spreadsheets/d/12SmuxFlJ7d9KTU7EWgIDlD7TZo1xePTXmCnYNlnlXA4`;
 // Construct the URL for fetching the data
 const csvUrl = `${ sheetsUrl }/gviz/tq?tqx=out:csv&sheet=comments&tq=${sqlStatement}&headers=0`;
-console.log(csvUrl);
 
 let mainComments = [];
 let replyComments = [];
@@ -63,19 +63,20 @@ function loadComments() {
         mainComments = [];
         replyComments = [];
 
-        for (let index = 0; index < rows.length; index++) {
+        for (let index = rows.length - 1; index >= 0; index--) {
             const row = rows[index];
             (row[3] == '""') ? mainComments.push(row) : replyComments.push(row);
         }
 
         // main comments
+        // if (!batchComments)
         for (let index = 0; index < commentsIndex; index++) {
             const comment = mainComments[index];
             createComment(comment);
-            //remove the already displayed main comments
-            mainComments.splice(index, 1);
         }
+        mainComments.splice(0, commentsToStart);
 
+        // reply comments
         for (let index = 0; index < replyComments.length; index++) {
             const replyComment = replyComments[index];
             createComment(replyComment);
@@ -203,13 +204,19 @@ function loadMoreComments() {
         //remove it to shorten future loops
         mainComments.splice(0, 1);
     }
+    console.log(mainComments);
     
     //replies
     for (let index = replyComments.length - 1; index >= 0; index--) {
         let comment = replyComments[index];
-        createComment(comment);
-        //remove it to shorten future loops
-        replyComments.splice(index, 1);
+        const parentId = `${comment[3].slice(1, -1)}-replies`;
+        const parentDiv = document.getElementById(parentId);
+        if (parentDiv) {
+            createComment(comment);
+            //remove it to shorten future loops
+            replyComments.splice(index, 1);
+        }
+        
     }
 
     //check if main comments is empty, and disable the load more button if so
