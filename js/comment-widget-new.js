@@ -1,6 +1,5 @@
-const batchComments = false;
-const commentsToStart = 3;
-let commentsIndex = commentsToStart;
+const batchComments = true;
+let commentsToStart = 50;
 const loadMoreCommentsButton = document.getElementById("loadMoreComments");
 
 // Function to format the date and time from the data
@@ -69,13 +68,21 @@ function loadComments() {
         }
 
         // main comments
-        // if (!batchComments)
-        for (let index = 0; index < commentsIndex; index++) {
+        if (!batchComments || commentsToStart > mainComments.length) commentsToStart = mainComments.length;
+        
+        for (let index = 0; index < commentsToStart; index++) {
             const comment = mainComments[index];
             createComment(comment);
         }
         mainComments.splice(0, commentsToStart);
 
+        //check if main comments is empty, and disable the load more button if so
+        if (!mainComments.length) {
+            loadMoreCommentsButton.disabled = true;
+            loadMoreCommentsButton.style.display = "none";
+        } 
+
+        if (!batchComments || commentsToStart > mainComments.length) replyComments.reverse();
         // reply comments
         for (let index = 0; index < replyComments.length; index++) {
             const replyComment = replyComments[index];
