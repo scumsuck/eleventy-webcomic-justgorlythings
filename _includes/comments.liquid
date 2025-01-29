@@ -1,20 +1,20 @@
-<div class="paperDiv commentForm" id="commentsForm">
+<div class="paperDiv comments-wrapper">
+    <h2>Add a comment</h2>
     <p id="comment-reply-info"></p>
-    <form onsubmit="return postComment()">
-        <label for="comment-name">Name:</label><br>
-        <input type="text" id="comment-name" name="entry.1995103453" required><br><br>
+    <form id="commentsForm" onsubmit="return postComment()">
+        <label for="comment-name" class="visually-hidden">Name:</label>
+        <input type="text" placeholder="Name" id="comment-name" name="entry.1995103453" required>
         
-        <label for="comment-comment">Comment:</label><br>
-        <textarea id="comment-comment" name="entry.1895795716" rows="4" cols="50"></textarea><br><br>
+        <label for="comment-comment" class="visually-hidden">Comment:</label>
+        <textarea id="comment-comment" name="entry.1895795716" placeholder="Write your comment..." onInput="this.parentNode.dataset.replicatedValue = this.value" required></textarea>
         
-        <input type="text" id="comment-posturl" name="entry.1368438253" value={{ pageUrl }}><br><br>
+        <input type="text" id="comment-posturl" name="entry.1368438253" style="display:none;" value={{ pageUrl }}>
 
-        <input type="text" id="comment-replies" name="entry.39824116"><br>
-        
-        <button id="comment-submit" type="submit">Submit</button>
+        <input type="text" id="comment-replies" style="display:none;" name="entry.39824116">
+        <button id="comment-submit" type="submit">Post Comment</button>
     </form>
 
-    <span id="commentsInfo">Loading comments...</span>
+    <h2 id="commentsInfo">Loading comments...</h2>
     <div id="comments"></div>
     <button id="loadMoreComments" onclick="loadMoreComments()">Load More Comments</button>
 </div>

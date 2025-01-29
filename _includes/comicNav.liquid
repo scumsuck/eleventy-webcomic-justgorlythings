@@ -28,3 +28,17 @@ we're on the first page of the comic, we don't need to show that button.
     <a href="{{ last.url }}"><img src="/img/comicnav/nav_last.png" alt="Last"></a>
   {% endif %}
 </div>
+
+<script>
+  function keyNav() {
+    document.addEventListener("keydown", (e) => {
+      if (e.key == 'ArrowRight') { //right arrow goes to next page
+        window.location.href ="{{ next.url }}";
+      } else if (e.key == "ArrowLeft") { //left arrow goes to previous page
+        window.location.href ="{{ previous.url }}";
+      } 
+    });
+  }
+
+  keyNav();
+</script>

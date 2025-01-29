@@ -3,7 +3,7 @@
 // you probably want a paid service and not this haha
 // we techniclly pull all comments for this page at once so you're not saving time on the fetch request
 // but maybe a tiny bit in terms of displaying them
-const batchComments = true;
+const batchComments = false;
 // how many comments we show to start
 let commentsToStart = 5;
 // IF batching comments, when you click to load more, how many comments do we pull (not counting replies)
@@ -19,7 +19,6 @@ const collapsedReplies = false;
 // TO DO : update this to pull from pathname if page url is not set for use outside of my template
 const thisPageUrl = document.currentScript.getAttribute('page-url');
 
-// Encode the SQL statement to be used in the URL
 /** Use SQL in the gviz URL to load the correct csv.
 	In this implementation, columns are mapped to the following:
 		A - timestamp, the time the comment was left
@@ -38,9 +37,6 @@ const csvUrl = `${ sheetsUrl }/gviz/tq?tqx=out:csv&sheet=comments&tq=${sqlStatem
 let mainComments = [];
 let replyComments = [];
 
-
-
-
 const loadMoreCommentsButton = document.getElementById("loadMoreComments");
 // Get the container element for the comments
 const commentsContainer = document.getElementById('comments');
@@ -52,11 +48,10 @@ function loadComments(isInitialLoad) {
     fetch(csvUrl)
     .then(response => response.text()) // Get the response text (data)
     .then(csvText => {
-        // Split the data into rows and then into individual cells
-        const rows = csvText.trim().split('\n').map(row => row.split(','));
+        const rows = csvToJson(csvText);
 
         // Check for empty comments before displaying to page
-        if (rows.length < 2) { 
+        if (rows.length < 1) { 
             commentsInfoContainer.innerText = "No comments";
             loadMoreCommentsButton.disabled = true;
             loadMoreCommentsButton.style.display = "none";
@@ -66,18 +61,15 @@ function loadComments(isInitialLoad) {
         mainComments = [];
         replyComments = [];
 
-        console.log(rows);
         for (let index = rows.length - 1; index >= 0; index--) {
             const row = rows[index];
-            (row[3] == '""') ? mainComments.push(row) : replyComments.push(row);
+            (!row['reply']) ? mainComments.push(row) : replyComments.push(row);
         }
 
-        console.log(mainComments, replyComments);
-
         /**
-         * I'm sure there's a more elegant and optimal way of handling this,
-         * but I am neither of those things. If you are, feel free to help!
-         * TO DO: link to the repo.
+          I'm sure there's a more elegant and optimal way of handling this,
+          but I am neither of those things. If you are, feel free to help!
+          TO DO: link to the repo.
          */
         if (!batchComments || commentsToStart > mainComments.length) {
             commentsToStart = mainComments.length;
@@ -85,7 +77,6 @@ function loadComments(isInitialLoad) {
             replyComments.reverse();
         } 
        
-
         // main comments
         for (let index = 0; index < commentsToStart; index++) {
             const comment = mainComments[index];
@@ -105,10 +96,8 @@ function loadComments(isInitialLoad) {
             createComment(replyComment);
         }
 
+        commentsInfoContainer.innerText = `${rows.length} comments`;
         replyButtons();
-
-        commentsInfoContainer.innerText = `${rows.length} total comments`;
-
         clearForm();
     })
     .catch(error => console.error('Error fetching data:', error)); // Handle any errors
@@ -134,14 +123,11 @@ function postComment() {
         })
     }).then(response => {
         if (replyTo) smoothScrollTo(replyTo);
-        // CLEAR THE FORM
         clearForm();
-        //RELOAD COMMENTS
         loadComments();
         enablePostCommentButton();
     })
     .catch(error => {console.log(error);});
-
     return false;
 };
 
@@ -158,28 +144,33 @@ const encodeFormData = (data) => {
 
 function createComment(comment, isInitialLoad) {
     if (!comment) return;
+
+    const name = comment['name'];
+    const date = formatDate(comment['timestamp']);
+    const text = comment['comment'].replace(/\[comma\]/g, ',');
     const commentDiv = document.createElement('div');
+   
     commentDiv.setAttribute('class', 'site-comment');
-    const name = comment[1].slice(1, -1);
-    const date = formatDate(comment[0].slice(1, -1));
-    const text = comment[2].slice(1, -1).replace(/\[comma\]/g, ',');
-    const commentId = name + '|--|' + comment[0].slice(1,-1);
+    const commentId = name + '|--|' + comment['timestamp'];
     commentDiv.id = commentId;
 
+
     commentDiv.innerHTML = `
-            <strong>${name}</strong> <em>${date}</em><p>${text}</p>
+            <strong>${name} ${comment['isauthor'] ? `<span class="author-bage">🍁 (author)</span>` : ``}</strong> <em>${date}</em>
+            ${(comment['reply']) ? `<span class="replying-to">replying to ${comment['reply'].split('|--|')[0]}</span>` : ``}
+            <p>${text}</p>
             <span class="comment-reply-button" onclick="replyToComment('${commentId}')">Reply</span>
-            ${(comment[3] == '""') ? `
+            ${(!comment['reply']) ? `
                 <span class="toggle-replies" id="showRepliesButton" style="display: none;" onclick="expandReplies(this, this.parentElement.id)"></span>
             ` : ``}
             <div id="${commentId}-replies" style="display:${(collapsedReplies ? 'none' : 'block')};"></div>
     `;
 
     if(!document.getElementById(commentId)){
-        if (comment[3] == '""') {
+        if (!comment['reply']) {
             (batchComments && isInitialLoad ) ? commentsContainer.appendChild(commentDiv) : commentsContainer.prepend(commentDiv);
         } else {
-            const parentId = `${comment[3].slice(1, -1)}-replies`;
+            const parentId = `${comment['reply']}-replies`;
             const parentDiv = document.getElementById(parentId);
             if (parentDiv) parentDiv.appendChild(commentDiv);
         }
@@ -189,7 +180,7 @@ function createComment(comment, isInitialLoad) {
 
 function replyToComment(commentId) {
     const replyToName = commentId.split('|--|')[0];
-    document.getElementById("comment-reply-info").innerHTML = `<small class="comment-reply-clear" onclick="clearCommentReplyItem()">Ⓧ&nbsp;&nbsp;&nbsp;</small><small onClick="jumpToComment('${commentId}')">Replying to ${replyToName}</small>`;
+    document.getElementById("comment-reply-info").innerHTML = `<small class="comment-reply-clear" onclick="clearCommentReplyItem()">❌&nbsp;&nbsp;&nbsp;</small><small>Replying to ${replyToName}</small>`;
     setValue('comment-replies', commentId);
     smoothScrollTo('commentsForm');
 };
@@ -204,7 +195,7 @@ function setValue(elementId, value) {
 };
 
 function disableButtonWithLoader(elementId) {
-    var buttonToDisable = document.getElementById(elementId);
+    const buttonToDisable = document.getElementById(elementId);
     if (buttonToDisable == null) {
         return;
     }
@@ -213,9 +204,10 @@ function disableButtonWithLoader(elementId) {
 }
 
 function enablePostCommentButton() {
-    var postCommentButton = document.getElementById("comment-submit");
+    const postCommentButton = document.getElementById("comment-submit");
     postCommentButton.disabled = false;
-    setText("comment-submit", "Post");
+    //TO DO: extract this out
+    setText("comment-submit", "Post Comment");
 };
 
 function setText(elementId, textContent) {
@@ -227,21 +219,20 @@ function loadMoreComments() {
     for (let index = 0; index < commentsToLoad; index++) {
         let comment = mainComments[0];
         createComment(comment, true);
-        //remove it to shorten future loops
+        //remove it to shorten future loops and to check if we need to disable load more for batching comments.
         mainComments.splice(0, 1);
     }
 
     //replies
     for (let index = replyComments.length - 1; index >= 0; index--) {
         let comment = replyComments[index];
-        const parentId = `${comment[3].slice(1, -1)}-replies`;
+        const parentId = `${comment['reply']}-replies`;
         const parentDiv = document.getElementById(parentId);
         if (parentDiv) {
             createComment(comment);
             //remove it to shorten future loops
             replyComments.splice(index, 1);
         }
-        
     }
 
     replyButtons();
@@ -301,6 +292,7 @@ function clearForm () {
     setValue("comment-replies", '');
 }
 
+// eternal thanks to matthew-e-brown for this one https://stackoverflow.com/a/59219146
 function csvToJson(text, headers, quoteChar = '"', delimiter = ',') {
     const regex = new RegExp(`\\s*(${quoteChar})?(.*?)\\1\\s*(?:${delimiter}|$)`, 'gs');
      const match = line => [...line.matchAll(regex)]
@@ -317,5 +309,42 @@ function csvToJson(text, headers, quoteChar = '"', delimiter = ',') {
       }, {});
     });
   }
+
+//TO DO: use this for after posting a comment and it's a reply to another one
+function fadeColor(element) {
+    if (currentFadeItem != null) {
+        clearInterval(currentFadeItem);
+        currentFadeItem = null;
+    }
+
+    const duration = 1000;
+    const step = 25;
+    let opacity = 1;
+    const timer = setInterval(function() {
+      opacity -= (1 / (duration / step));
+      if (opacity <= 0) {
+        clearInterval(timer);
+        currentFadeItem = null;
+        opacity = 0;
+      }
+      element.style.background = "rgba(3, 155, 229, "+ opacity +")";
+    }, step);
+    currentFadeItem = timer;
+};
+
+// basic html escape for the links portion
+// not the most robust, so check your comments periodically
+const escapeHTML = str =>
+    str.replace(
+        /[&<>'"]/g,
+        tag =>
+        ({
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            "'": '&#39;',
+            '"': '&quot;'
+        }[tag] || tag)
+    );
 
 loadComments(true);
