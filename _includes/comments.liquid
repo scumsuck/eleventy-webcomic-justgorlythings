@@ -5,9 +5,13 @@
         <label for="comment-name" class="visually-hidden">Name:</label>
         <input type="text" placeholder="Name" id="comment-name" name="entry.1995103453" required>
         
-        <label for="comment-comment" class="visually-hidden">Comment:</label>
-        <textarea id="comment-comment" name="entry.1895795716" placeholder="Write your comment..." onInput="this.parentNode.dataset.replicatedValue = this.value" required></textarea>
-        
+        <div class="textarea-container">
+
+            <label for="comment-comment" class="visually-hidden">Comment:</label>
+            <textarea id="comment-comment" name="entry.1895795716" placeholder="Write your comment..." onInput="this.parentNode.dataset.replicatedValue = this.value" required></textarea>
+            <span class="emoji-btn"><span class="visually-hidden">Choose an emoji</span>&#9786;</span>
+            
+        </div>
         <input type="text" id="comment-posturl" name="entry.1368438253" style="display:none;" value={{ pageUrl }}>
 
         <input type="text" id="comment-replies" style="display:none;" name="entry.39824116">
@@ -19,3 +23,16 @@
     <button id="loadMoreComments" onclick="loadMoreComments()">Load More Comments</button>
 </div>
 <script src="/js/comment-widget-new.js" page-url={{ pageUrl }}></script>
+<script src="/js/vanillaEmojiPicker.js"></script>
+<script>
+    new EmojiPicker({
+        trigger: [
+            {
+                selector: '.emoji-btn',
+                insertInto: ['#comment-comment'] // If there is only one '.selector', than it can be used without array
+            }
+        ],
+        closeButton: true,
+        specialButtons: '#007BFF' // #008000, rgba(0, 128, 0);
+    });
+</script>

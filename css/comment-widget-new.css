@@ -92,6 +92,26 @@
     resize: vertical;
 }
 
+.textarea-container {
+    position: relative;
+}
+
+/* emoji button */
+.emoji-btn {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 2rem;
+    line-height: 0.75;
+    color: var(--button-color);
+    transition: color 0.3s ease;
+}
+
+.emoji-btn:hover {
+    cursor: pointer;
+    color: var(--button-color-hover);
+}
+
 /* Comment section */
 .c-comment {
     margin-bottom: 15px;
