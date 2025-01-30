@@ -12,7 +12,11 @@ const commentsToLoad = 5;
 // but in case you really detest expanded replies you change it true to have replies collapsed by default
 const collapsedReplies = false;
 
+const authorBadgeText = "✅ (author)";
 
+const svgReplyIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122.88 98.86" style="enable-background:new 0 0 122.88 98.86" xml:space="preserve">
+    <path d="m0 49.43 48.93 49.43V74.23c30.94-6.41 55.39.66 73.95 24.19-3.22-48.4-36.29-71.76-73.95-73.31V0L0 49.43z" style="fill-rule:evenodd;clip-rule:evenodd"/>
+</svg>`;
 
 
 // Get the current page URL
@@ -105,7 +109,7 @@ function loadComments(isInitialLoad) {
 
 function postComment() {
     disableButtonWithLoader("comment-submit");
-    const username = getValue("comment-name");
+    const username = getValue("commentName");
     const comment = getValue("comment-comment");
     const replyTo = getValue("comment-replies");
 
@@ -150,20 +154,27 @@ function createComment(comment, isInitialLoad) {
     const text = comment['comment'].replace(/\[comma\]/g, ',');
     const commentDiv = document.createElement('div');
    
-    commentDiv.setAttribute('class', 'site-comment');
+    commentDiv.setAttribute('class', 'comment-div');
     const commentId = name + '|--|' + comment['timestamp'];
     commentDiv.id = commentId;
 
 
     commentDiv.innerHTML = `
-            <strong>${name} ${comment['isauthor'] ? `<span class="author-bage">🍁 (author)</span>` : ``}</strong> <em>${date}</em>
-            ${(comment['reply']) ? `<span class="replying-to">replying to ${comment['reply'].split('|--|')[0]}</span>` : ``}
+        <div class="comment-content-wrap">
+            <div class="comment-header">
+                <span class="comment-name">${name} ${comment['isauthor'] ? `<span class="author-badge">${authorBadgeText}</span>` : ``}</span>
+                ${(comment['reply']) ? `<span class="replying-to" onclick="highlightComment('${comment['reply']}')">@ ${comment['reply'].split('|--|')[0]}</span>` : ``}
+                <span class="comment-date">${date}</span>
+            </div>
             <p>${text}</p>
-            <span class="comment-reply-button" onclick="replyToComment('${commentId}')">Reply</span>
-            ${(!comment['reply']) ? `
-                <span class="toggle-replies" id="showRepliesButton" style="display: none;" onclick="expandReplies(this, this.parentElement.id)"></span>
-            ` : ``}
-            <div id="${commentId}-replies" style="display:${(collapsedReplies ? 'none' : 'block')};"></div>
+            <div class="comment-footer">
+                <span class="comment-reply-button" onclick="replyToComment('${commentId}')">${svgReplyIcon} Reply</span>
+                ${(!comment['reply']) ? `
+                    <span class="toggle-replies" style="display: none;" onclick="expandReplies(this, this.parentElement.parentElement.parentElement.id)"></span>
+                ` : ``}
+            </div>
+        </div>
+        <div id="${commentId}-replies" style="display:${(collapsedReplies ? 'none' : 'block')};"></div>
     `;
 
     if(!document.getElementById(commentId)){
@@ -275,11 +286,11 @@ function replyButtons () {
     const replyButtons = document.getElementsByClassName("toggle-replies");
  
     for (let index = 0; index < replyButtons.length; index++) {
-        const parentId = replyButtons[index].parentElement.id;
+        const parentId = replyButtons[index].parentElement.parentElement.parentElement.id;
         
         const parent = document.getElementById(parentId);
 
-        const numReplies = parent.querySelectorAll('.site-comment').length;
+        const numReplies = parent.querySelectorAll('.comment-div').length;
 
         if (numReplies) replyButtons[index].style.display = "inline-block";
         replyButtons[index].innerText = `${collapsedReplies ? 'Show Replies' : 'Hide Replies'} (${numReplies})`;
@@ -287,7 +298,7 @@ function replyButtons () {
 }
 
 function clearForm () {
-    setValue("comment-name", ''); 
+    setValue("commentName", ''); 
     setValue("comment-comment", '');
     setValue("comment-replies", '');
 }
@@ -310,6 +321,13 @@ function csvToJson(text, headers, quoteChar = '"', delimiter = ',') {
     });
   }
 
+function highlightComment (elementId) {
+    const comment = document.getElementById(elementId).children[0];
+    smoothScrollTo(elementId);
+    fadeColor(comment);
+}
+
+let currentFadeItem = null;
 //TO DO: use this for after posting a comment and it's a reply to another one
 function fadeColor(element) {
     if (currentFadeItem != null) {
@@ -331,20 +349,5 @@ function fadeColor(element) {
     }, step);
     currentFadeItem = timer;
 };
-
-// basic html escape for the links portion
-// not the most robust, so check your comments periodically
-const escapeHTML = str =>
-    str.replace(
-        /[&<>'"]/g,
-        tag =>
-        ({
-            '&': '&amp;',
-            '<': '&lt;',
-            '>': '&gt;',
-            "'": '&#39;',
-            '"': '&quot;'
-        }[tag] || tag)
-    );
 
 loadComments(true);

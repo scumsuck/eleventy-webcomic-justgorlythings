@@ -113,83 +113,72 @@
 }
 
 /* Comment section */
-.c-comment {
-    margin-bottom: 15px;
-    border-left: 3px solid #d2d2d2;
-    padding: 0 0 0 15px;
-}
-
-.c-reply {
-    display: block;
-    width: 97%;
-    margin-bottom: 10px;
-    margin-left: auto;
-    margin-right: 0;
-    padding: 10px;
-}
-
-.c-reply:last-child {
-    margin-bottom: 0;
-}
-
-.c-replyContainer {
-    margin: -10px;
-    margin-top: 10px;
-    padding: 10px;
-}
-
-.c-name {
-    display: inline-block;
-    margin: 0;
-    margin-right: 5px;
-    padding: 0;
-    font-weight: bold;
-    font-size: 1rem;
-}
-
-.c-site {
-    text-decoration: none;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-}
-
-.c-timestamp {
-    opacity: 75%;
-    font-size: 0.7rem;
-    display: block;
-}
-
-.c-text {
-    margin: 0;
-    margin-left: -10px;
-    margin-right: -10px;
-    padding: 10px;
+.comment-div {
+    margin: 1rem 0;
+    word-wrap: break-word;
     font-family: var(--comment-text-font);
-    font-size: 1rem;
-    text-align: justify;
-    color: var(--comment-text-color);
 }
 
-/* Pagination */
-#c_pagination {
-    text-align: center;
+.comment-div .comment-div {
+    margin-left: 1.75rem;
 }
 
-.c-replyButton,
-.c-expandButton {
-    margin-top: 10px;
-    margin-right: 4px;
-    background: none !important;
-    border: none;
-    padding: 0 !important;
+.comment-content-wrap {
+    padding: 1rem 2rem;
+    box-shadow: 0 0 2px 2px rgba(0,0,0,.1);
+    border-radius: 5px;
+}
+
+.comment-name,
+.comment-footer {
+    font-family: var(--comment-title-font);
+}
+
+.comment-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.comment-date {
+    color: #4f4f47;
+    font-size: 0.9rem;
+    margin-top: -5px;
+    display: block;
+}
+
+.comment-content-wrap p {
+    margin: .5rem 0 1.5rem;
+}
+
+.replying-to {
+    color: #4f4f47;
+    font-size: 0.9rem;
+}
+
+.replying-to:hover {
+    color: #787872;
     cursor: pointer;
 }
 
-.c-expandButton {
-    margin-left: 30px;
+.comment-reply-button,
+.toggle-replies {
+    color: var(--button-color);
+    transition: color 0.3s ease;
 }
 
-.c-paginationButton {
-    margin-right: 4px;
-    margin-left: 4px;
+.comment-reply-button svg {
+    width: 15px;
+    height: auto;
+    margin-top: -6px;
+    fill: var(--button-color);
+}
+
+.comment-reply-button:hover,
+.toggle-replies:hover {
+    color: var(--button-color-hover);
+    cursor: pointer;
+}
+
+.toggle-replies {
+    margin-left: 2rem;
 }
