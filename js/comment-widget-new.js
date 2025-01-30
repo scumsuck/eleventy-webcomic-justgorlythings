@@ -12,7 +12,7 @@ const commentsToLoad = 5;
 // but in case you really detest expanded replies you change it true to have replies collapsed by default
 const collapsedReplies = false;
 
-const authorBadgeText = "✅ (author)";
+const authorBadgeText = "• ✅ (author)";
 
 const svgReplyIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122.88 98.86" style="enable-background:new 0 0 122.88 98.86" xml:space="preserve">
     <path d="m0 49.43 48.93 49.43V74.23c30.94-6.41 55.39.66 73.95 24.19-3.22-48.4-36.29-71.76-73.95-73.31V0L0 49.43z" style="fill-rule:evenodd;clip-rule:evenodd"/>
@@ -73,7 +73,7 @@ function loadComments(isInitialLoad) {
         /**
           I'm sure there's a more elegant and optimal way of handling this,
           but I am neither of those things. If you are, feel free to help!
-          TO DO: link to the repo.
+          https://github.com/katedee/eleventy-webcomic
          */
         if (!batchComments || commentsToStart > mainComments.length) {
             commentsToStart = mainComments.length;

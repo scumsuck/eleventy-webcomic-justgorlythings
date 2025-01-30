@@ -1,6 +1,7 @@
-:root {
+.comments-wrapper {
     /**
-     * By now you should be a bit familiar with CSS variables from the main site styles
+     * By now you should be a bit familiar with CSS variables from the main site styles.
+     * Rather than declare these on the root, we've set it to the more local comments, to help avoid any name clashes.
      * (https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) 
      */
     --comment-title-font: 'IM Fell English', serif;
@@ -11,6 +12,7 @@
     --button-color: #da5437;
     --button-color-hover: #b54a32;
     --button-text-color: #fff;
+    --author-badge-color: #797979;
 }
 
 /**
@@ -146,6 +148,11 @@
     display: block;
 }
 
+.author-badge {
+    color: var(--author-badge-color);
+    font-size: 0.9rem;
+}
+
 .comment-content-wrap p {
     margin: .5rem 0 1.5rem;
 }
@@ -160,6 +167,10 @@
     cursor: pointer;
 }
 
+.comment-footer {
+    font-size: 0.9rem;
+}
+
 .comment-reply-button,
 .toggle-replies {
     color: var(--button-color);
@@ -167,9 +178,9 @@
 }
 
 .comment-reply-button svg {
-    width: 15px;
+    width: 11px;
     height: auto;
-    margin-top: -6px;
+    margin-top: -5px;
     fill: var(--button-color);
 }
 
