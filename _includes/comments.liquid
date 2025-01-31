@@ -1,4 +1,36 @@
-<div class="paperDiv commentForm">
-    <div id="c_widget"></div>
-    <script src="/js/comment-widget.js" {% if pageUrl %}page-url={{ pageUrl }} {% endif %}></script>
+<div class="paperDiv comments-wrapper">
+    <h2>Add a comment</h2>
+    <form id="commentsForm" onsubmit="return postComment()">
+        <p id="comment-reply-info"></p>
+        <label for="comment-name" class="visually-hidden">Name:</label>
+        <input type="text" placeholder="Name" id="commentName" required>
+        <div class="textarea-container">
+            <label for="comment-comment" class="visually-hidden">Comment:</label>
+            <textarea id="comment-comment" placeholder="Write your comment..." onInput="this.parentNode.dataset.replicatedValue = this.value" required></textarea>
+            <span class="emoji-btn"><span class="visually-hidden">Choose an emoji</span></span>
+            <div id="emojiSelect"></div>
+        </div>
+        <input type="text" id="comment-posturl" style="display:none;" value={{ pageUrl }}>
+
+        <input type="text" id="comment-replies" style="display:none;">
+        <button id="comment-submit" type="submit">Post Comment</button>
+    </form>
+
+    <h2 id="commentsInfo">Loading comments...</h2>
+    <div id="comments"></div>
+    <button id="loadMoreComments" onclick="loadMoreComments()">Load More Comments</button>
 </div>
+<script src="/js/comments.js" page-url={{ pageUrl }}></script>
+<script src="/js/vanillaEmojiPicker.js"></script>
+<script>
+    new EmojiPicker({
+        trigger: [
+            {
+                selector: '.emoji-btn',
+                insertInto: ['#comment-comment'] 
+            }
+        ],
+        closeButton: true,
+        specialButtons: '#007BFF' 
+    });
+</script>
