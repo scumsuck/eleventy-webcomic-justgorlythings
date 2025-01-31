@@ -6,10 +6,10 @@
 
 /**
  * @import lets you break up your CSS into multiple files; I use it here to
- * seperate the reset settings from the rest of the styles.
+ * seperate the reset settings from the rest of the styles and to import the comments styles.
  */
 @import "/css/reset.css";
-@import "/css/comment-widget-new.css";
+@import "/css/comments.css";
 
 /* FONTS */
 

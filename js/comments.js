@@ -1,3 +1,24 @@
+/**
+ * REQUIRED VALUES
+ * sheetsUrl and googleFields are mandatory to get this code working
+ */
+const sheetsUrl = `https://docs.google.com/spreadsheets/d/12SmuxFlJ7d9KTU7EWgIDlD7TZo1xePTXmCnYNlnlXA4`;
+
+/**
+ * Field IDs
+ * you can easily extract the IDs using this tool here:
+ * https://stefano.brilli.me/google-forms-html-exporter/
+ */
+const googleFields = {
+    username: "entry.1995103453", // entry.USERNAME_ID
+    comment: "entry.1895795716", // entry.COMMENT_ID
+    postUrl: "entry.1368438253", // entry.POST_URL_ID
+    reply: "entry.39824116" // entry.REPLY_ID
+};
+
+/**
+ * OPTIONAL VALUES / SETTINGS
+ */
 // wether we want to batch comments, or just load them all at once (false)
 // I set it to a default of false because truly if you're getting that many comments,
 // you probably want a paid service and not this haha
@@ -9,18 +30,26 @@ let commentsToStart = 5;
 // IF batching comments, when you click to load more, how many comments do we pull (not counting replies)
 const commentsToLoad = 5;
 // I've defaulted this to false because people hate clicking,
-// but in case you really detest expanded replies you change it true to have replies collapsed by default
+// but in case you really detest expanded replies you can change it to true to have replies collapsed by default
 const collapsedReplies = false;
 
+const commentPostButtonText = "Post Comment";
+
 const authorBadgeText = "• ✅ (author)";
+
+
+/**
+ * Lasciate ogne speranza, voi ch'intrate
+ * Abandon all hope, ye who enter here
+ * 
+ * Just kidding! Mostly, just don't tamper with things past this point unless you're familiar with javascript/know what you're doing.
+ */
 
 const svgReplyIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122.88 98.86" style="enable-background:new 0 0 122.88 98.86" xml:space="preserve">
     <path d="m0 49.43 48.93 49.43V74.23c30.94-6.41 55.39.66 73.95 24.19-3.22-48.4-36.29-71.76-73.95-73.31V0L0 49.43z" style="fill-rule:evenodd;clip-rule:evenodd"/>
 </svg>`;
 
-
 // Get the current page URL
-// TO DO : update this to pull from pathname if page url is not set for use outside of my template
 const thisPageUrl = document.currentScript.getAttribute('page-url');
 
 /** Use SQL in the gviz URL to load the correct csv.
@@ -34,7 +63,7 @@ const thisPageUrl = document.currentScript.getAttribute('page-url');
 */
 
 const sqlStatement = encodeURIComponent(`SELECT A, B, C, E, F WHERE D = '${thisPageUrl}'`);
-const sheetsUrl = `https://docs.google.com/spreadsheets/d/12SmuxFlJ7d9KTU7EWgIDlD7TZo1xePTXmCnYNlnlXA4`;
+
 // Construct the URL for fetching the data
 const csvUrl = `${ sheetsUrl }/gviz/tq?tqx=out:csv&sheet=comments&tq=${sqlStatement}&headers=1`;
 
@@ -120,15 +149,15 @@ function postComment() {
         "Content-Type": "application/x-www-form-urlencoded"
         },
         body: encodeFormData({
-            "entry.1995103453" : username?.toString(),
-		  	"entry.1895795716" : comment?.toString().replace(/,/g, '[comma]'),
-            "entry.1368438253" : thisPageUrl?.toString(),
-            "entry.39824116" : replyTo?.toString()
+            [googleFields.username] : username?.toString(),
+		  	[googleFields.comment] : comment?.toString().replace(/,/g, '[comma]'),
+            [googleFields.postUrl] : thisPageUrl?.toString(),
+            [googleFields.reply] : replyTo?.toString()
         })
     }).then(response => {
-        if (replyTo) smoothScrollTo(replyTo);
         clearForm();
         loadComments();
+        if (replyTo) smoothScrollTo(replyTo);
         enablePostCommentButton();
     })
     .catch(error => {console.log(error);});
@@ -163,7 +192,7 @@ function createComment(comment, isInitialLoad) {
         <div class="comment-content-wrap">
             <div class="comment-header">
                 <span class="comment-name">${name} ${comment['isauthor'] ? `<span class="author-badge">${authorBadgeText}</span>` : ``}</span>
-                ${(comment['reply']) ? `<span class="replying-to" onclick="highlightComment('${comment['reply']}')">@ ${comment['reply'].split('|--|')[0]}</span>` : ``}
+                ${(comment['reply']) ? `<span class="replying-to" onclick="highlightComment('${comment['reply']}')"> @ ${comment['reply'].split('|--|')[0]}</span>` : ``}
                 <span class="comment-date">${date}</span>
             </div>
             <p>${text}</p>
@@ -211,13 +240,12 @@ function disableButtonWithLoader(elementId) {
         return;
     }
     buttonToDisable.disabled = true;
-    setText(elementId, "..submitting comment");
+    setText(elementId, "...submitting comment");
 }
 
 function enablePostCommentButton() {
     const postCommentButton = document.getElementById("comment-submit");
     postCommentButton.disabled = false;
-    //TO DO: extract this out
     setText("comment-submit", "Post Comment");
 };
 
@@ -241,7 +269,7 @@ function loadMoreComments() {
         const parentDiv = document.getElementById(parentId);
         if (parentDiv) {
             createComment(comment);
-            //remove it to shorten future loops
+            //remove it to shorten future checks
             replyComments.splice(index, 1);
         }
     }
@@ -328,7 +356,7 @@ function highlightComment (elementId) {
 }
 
 let currentFadeItem = null;
-//TO DO: use this for after posting a comment and it's a reply to another one
+
 function fadeColor(element) {
     if (currentFadeItem != null) {
         clearInterval(currentFadeItem);
