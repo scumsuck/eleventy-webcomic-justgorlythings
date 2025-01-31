@@ -1,4 +1,15 @@
 /**
+ * Please refer to my guide for setup help if you're confused:
+ * https://webcomics.fyi/templates/adding-comments.html
+ * 
+ * Bug reports are encouraged if you happen to run into any issues.
+ * https://github.com/katedee/eleventy-webcomic/issues
+ * click "new issue", you will need a github account to do so, but they are free, and you likely created one setting up this template ;)
+ * 
+ * Many thanks to JD Porterfield's Jekyll Comments Guide for being the base of most of this (https://jdvp.me/articles/Google-Forms-Jekyll-Comments)
+ */
+
+/**
  * REQUIRED VALUES
  * sheetsUrl and googleFields are mandatory to get this code working
  */
@@ -18,25 +29,24 @@ const googleFields = {
 
 /**
  * OPTIONAL VALUES / SETTINGS
+ * I've set defaults for these settings, so you don't need to modify them but can if you want.
  */
-// wether we want to batch comments, or just load them all at once (false)
-// I set it to a default of false because truly if you're getting that many comments,
-// you probably want a paid service and not this haha
-// we techniclly pull all comments for this page at once so you're not saving time on the fetch request
-// but maybe a tiny bit in terms of displaying them
+// the author badge that shows if it's one of your verified comments
+const authorBadgeText = "• ✅ (author)";
+
+// If replies to comments are open/visible by default (false) or collapsed (true).
+// I've defaulted this to false because people hate clicking, so we're showing comments by default.
+const collapsedReplies = false;
+
+/**  BATCH COMMENTS OPTIONS
+ * These are settings for wether or not we want to "batch" comments (true), or just load them all at once (false). I've defaulted it to false, because I find people don't like clicking a lot of buttons, and chances are we're not dealing with hundreds of comments.
+*/
+// set to true if you want to batch comments, false if not.
 const batchComments = false;
 // how many comments we show to start
 let commentsToStart = 5;
-// IF batching comments, when you click to load more, how many comments do we pull (not counting replies)
+// IF batching comments, when you click to load more, how many more comments do we show (not counting replies)
 const commentsToLoad = 5;
-// I've defaulted this to false because people hate clicking,
-// but in case you really detest expanded replies you can change it to true to have replies collapsed by default
-const collapsedReplies = false;
-
-const commentPostButtonText = "Post Comment";
-
-const authorBadgeText = "• ✅ (author)";
-
 
 /**
  * Lasciate ogne speranza, voi ch'intrate
