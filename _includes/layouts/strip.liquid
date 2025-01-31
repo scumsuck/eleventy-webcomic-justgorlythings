@@ -16,7 +16,8 @@ tags and variables in Liquid, see https://liquidjs.com.
 As a quick rundown for how this file works, we use the `unless` tag to display
 content depending on if we have data, and the `render` tag includes another
 Liquid file within the template.
-{% endcomment %}<div class="comic">
+{% endcomment %}
+<div class="comic">
   {% render 'comic.liquid', collection: collections.comic, page: page, images: images, alt: alt, date: date %}
 </div>
 {%# If we have author notes, include them %}
@@ -28,5 +29,7 @@ Liquid file within the template.
   {% endunless %}
 </div>
 
-{% comment %} {% render 'comments.liquid' pageUrl: page.url %}   {% endcomment %}
+{% comment %} 
+{% render 'comments.liquid' pageUrl: page.url %}
+{% endcomment %}
 

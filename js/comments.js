@@ -12,6 +12,7 @@
 /**
  * REQUIRED VALUES
  * sheetsUrl and googleFields are mandatory to get this code working
+ * rememember to delete the /edit?usp=sharing at the end of the link!
  */
 const sheetsUrl = `https://docs.google.com/spreadsheets/d/12SmuxFlJ7d9KTU7EWgIDlD7TZo1xePTXmCnYNlnlXA4`;
 
