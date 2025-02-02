@@ -1,18 +1,35 @@
-# eleventy-rarebit-template
+# eleventy-webcomic
 
-eleventy-rarebit-template is a starter template for Eleventy that's built to replicate the functionality found in [geno7's](https://geno7.neocities.org/) [Rarebit](https://rarebit.neocities.org/) webcomic template.
+> This is a quick overview of things if you kind of know what you're doing. More extensive instructions are coming!!
+
+This is a template of a template of a template. Eleventy-webcomic is a template, built off of the Rashon's [eleventy-rarebit](), which itself is built to replicate the functionality found in [geno7's](https://geno7.neocities.org/) [Rarebit](https://rarebit.neocities.org/) webcomic template.
 
 ## Features
 
-- **Fully Static**: Built from [Liquid](https://www.11ty.dev/docs/languages/liquid/) templates, pages no longer require JavaScript to fully load. ([Why does this matter?](https://adamsilver.io/blog/javascript-isnt-always-available-and-its-not-the-users-fault/))
+- **Mostly Static**: Built from [Liquid](https://www.11ty.dev/docs/languages/liquid/) templates, pages core functions no longer require JavaScript. ([Why does this matter?](https://adamsilver.io/blog/javascript-isnt-always-available-and-its-not-the-users-fault/)). There are some "additional" features (comments, navigating with keyboard arrow keys, archive drop down selection) which require javascript, but the core reading experience functions just fine!
+
 - **Drag and Drop**: No more fiddling with JavaScript to add updates; comic pages can be added with [Markdown](https://www.11ty.dev/docs/languages/markdown/) through custom [front matter](https://www.11ty.dev/docs/data-frontmatter/).
-- **Beginner Friendly**: eleventy-rarebit-template maintains the same philosophy as Rarebit to be as beginner friendly as possible. Files are commented extensively with constant references to the Eleventy Docs and other relevant documentation.
 
-## Getting Started
+- **Beginner Friendly**: eleventy-rarebit-template maintains the same philosophy as Rarebit to be as beginner friendly as possible. Files are commented extensively with constant references to the Eleventy Docs and other relevant documentation. In addition, I'm working on a setup tutorial [over here](https://webcomics.fyi/templates/my-template.html).
 
-> **If you're new to Eleventy, make sure you go over its [Getting Started](https://www.11ty.dev/docs/getting-started/) guide.**
+- **RSS Feed**: An RSS feed of your comic is automatically generated after some very slight setup. I've added this because people still frequently use them (especially for webcomics), and some webrings require you to have one in order to be listed with them.
 
-This template is built assuming you'll be deploying your site to [Neocities](https://neocities.org/). If that isn't the case, feel free to delete the repository's `.github` folder and skip steps 2 & 3. Otherwise, setting up your site goes as follows...
+- **more “neutral” default styling** (mostly done for my site, but why not 🤷‍♀️)
+
+- **revamp of the archive.** It is explicitly divided by chapters, and only shows one image per chapter (and using 11ty img to output it at a smaller size). Additionally, there's a dropdown selection to go to a page for chapter
+
+- **added explicit date setting in the post**, in case folks copy a file to make a new page, using the github repo as a pseudo-CMS.
+
+- **ability to add comments**, leveraging google forms (big shout to the jekyll guy). We've even got emojis! 💅
+
+- **added back arrowkey navigation**, because folks seem really set on it
+
+## Deployment
+
+### Netlify
+
+
+### Neocities
 
 1. [Create a new GitHub repository from this template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template#creating-a-repository-from-a-template)
 2. From your [account settings](https://neocities.org/settings) in Neocities, generate an API key for your site by clicking **Manage Site Settings (of target site) > API > Generate API Key**
@@ -23,7 +40,8 @@ This template is built assuming you'll be deploying your site to [Neocities](htt
 
 You now have a hot-reloading preview of your website! Go ahead and start tailoring the template for your comic. When you're ready to publish, just [commit](https://docs.github.com/en/desktop/making-changes-in-a-branch/committing-and-reviewing-changes-to-your-project-in-github-desktop) and [push]() your changes in GitHub Desktop; your site should update on Neocities shortly afterwards!
 
-## Usage
+## Usage & Eleventy
+> **If you're new to Eleventy, make sure you go over its [Getting Started](https://www.11ty.dev/docs/getting-started/) guide.**
 
 Comic pages can be stored in any subfolder within your Eleventy project's [input directory](https://www.11ty.dev/docs/config/#input-directory). You can specify their custom data - whether that be titles, images, or thumbnails -  through [template and directory data files](https://www.11ty.dev/docs/data-template-dir/) or [front matter data](https://www.11ty.dev/docs/data-frontmatter/).
 
