@@ -17,7 +17,7 @@ As a quick rundown for how this file works, we use the `unless` tag to display
 content depending on if we have data, and the `render` tag includes another
 Liquid file within the template.
 {% endcomment %}
-<div class="comic">
+<div class="comic {% if spread %}double-page{% endif %}">
   {% render 'comic.liquid', collection: collections.comic, page: page, images: images, alt: alt, date: date %}
 </div>
 {%# If we have author notes, include them %}
@@ -28,7 +28,6 @@ Liquid file within the template.
       {{ content }}
   {% endunless %}
 </div>
-
 {% comment %} 
 {% render 'comments.liquid' pageUrl: page.url %}
 {% endcomment %}

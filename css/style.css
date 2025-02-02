@@ -58,6 +58,8 @@ img {
    * properties, check out Kevin Powell's video: https://youtu.be/U9VF-4euyRo
    */
   --pg-width: min(64rem, 90%);
+  /* page width for double/spread pages that are one page */
+  --double-pg-width: min(84rem, 100%);
 
   /**
   * The following is variables that set colours for things on the site.
@@ -143,6 +145,10 @@ footer p {
   margin: 3rem auto 0 auto;
   width: var(--pg-width);
   padding: 20px;
+}
+
+.double-page #comicPage {
+  width: var(--double-pg-width);
 }
 
 #comicPage img {

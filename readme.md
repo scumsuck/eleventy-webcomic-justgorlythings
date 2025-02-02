@@ -7,7 +7,6 @@ eleventy-rarebit-template is a starter template for Eleventy that's built to rep
 - **Fully Static**: Built from [Liquid](https://www.11ty.dev/docs/languages/liquid/) templates, pages no longer require JavaScript to fully load. ([Why does this matter?](https://adamsilver.io/blog/javascript-isnt-always-available-and-its-not-the-users-fault/))
 - **Drag and Drop**: No more fiddling with JavaScript to add updates; comic pages can be added with [Markdown](https://www.11ty.dev/docs/languages/markdown/) through custom [front matter](https://www.11ty.dev/docs/data-frontmatter/).
 - **Beginner Friendly**: eleventy-rarebit-template maintains the same philosophy as Rarebit to be as beginner friendly as possible. Files are commented extensively with constant references to the Eleventy Docs and other relevant documentation.
-- **Go Further With 11ty**: [Eleventy](https://www.11ty.dev/) is a simpler static site generator whose functionality can be extended with plugins such as [RSS](https://www.11ty.dev/docs/plugins/rss/), [Image](https://www.11ty.dev/docs/plugins/image/), and [i18n](https://www.11ty.dev/docs/plugins/i18n/).
 
 ## Getting Started
 
