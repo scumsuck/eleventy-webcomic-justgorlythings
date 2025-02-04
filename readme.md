@@ -29,7 +29,7 @@ This is a template of a template of a template. Eleventy-webcomic is a template,
 ### Netlify
 1. Make sure you have a Github account setup first.
 
-2. Click this button: [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/netlify-templates/next-netlify-starter)
+2. Click this button: [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/katedee/eleventy-webcomic.git)
 
 
 ### Neocities
