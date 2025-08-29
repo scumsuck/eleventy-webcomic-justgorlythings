@@ -1,3 +1,5 @@
+
+
 /**
  * @import lets you break up your CSS into multiple files; I use it here to
  * seperate the reset settings from the rest of the styles and to import the comments styles.
@@ -11,28 +13,17 @@
   --pg-width: min(64rem, 1000px);
   /* page width for double/spread pages that are one page */
   --double-pg-width: min(84rem, 100%);
-
-  /* universal background color */
-  --bg-color: #f1ece4;
-  /* the colour of links */
-  --link-color: #222;
-  /* link colours when hovered over */
-
-  --text-color: #222;
-
-   /**
-  * I recommend not changing this, UNLESS you are getting rid of the paper tear effect
-  * If you DON'T want the paper tear effect remove from PAPER TEAR BEGIN to PAPER TEAR END
-  * Roughly lines 149-172 of this file, although that might move a bit as things get added.
-  **/
-  --content-bg: var(--color-content-background);
 }
 
 
 :root {
   --border-radius: 12px;
   --body-font: 'Comic Neue', sans-serif;
-  --title-font: 'Darumadrop One', sans-serif;
+  --title-font: 'Yellowtail', 'Darumadrop One', sans-serif;
+  --antique-font-stack: 'Bookman Old Style', 'URW Bookman', 'URW Bookman L', 'Georgia Pro', Georgia, serif;
+  --monospace-font-stack: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace; 
+  --italics: color-mix(in srgb, var(--color-foreground-text) 70.0%, var(--color-accent-alt) 30%);
+  --bold: color-mix(in srgb, var(--color-body-text) 50.0%, var(--color-accent-alt) 50%);
 }
 
 :root, 
@@ -45,11 +36,14 @@
   --color-accent: #34386e;
   --color-accent-alt:#c54264;
   --color-accent-alt2: #976b7e;
-  --color-accent-link: #ff4586;
+  --color-accent-link:#c54264;
+
+
 
   --link-color-hover: #eaebf0;
   --background-image: url("/img/hip-square-dark.png");
   --notes:#eaebf08a;
+
 }
 
 [data-selected-theme="light"] {
@@ -75,7 +69,17 @@ body {
   background-color: var(--bg-color);
 }
 
-/* link colors */
+em {
+color: var(--italics);
+font-family: var(--monospace-font-stack);
+}
+
+strong {
+color: var(--bold);
+font-weight: bolder;
+font-family: var(--antique-font-stack);
+}
+
 
 
 /* HEADER */
@@ -94,7 +98,11 @@ header nav {
   margin-top: 1rem;
   text-align: center;
   border-width: 1px 0;
-  padding: 10px;
+  padding: 1em;
+display: grid;
+  grid-template-columns: repeat( auto-fit, minmax(90px, 1fr) );
+  gap: 1em;
+  max-width: 1000px;
 }
 
 nav a {
@@ -119,6 +127,7 @@ footer p {
   width: var(--pg-width);
   padding: 20px;
   max-width: 100%;
+  border-radius: 1em;
 }
 
 .double-page #comicPage {
@@ -132,7 +141,7 @@ footer p {
 
 /* Don't remove this bit though */
 .paperDiv {
-  background: var(--content-bg);
+  background: var(--color-content-background);
   position: relative;
   width: var(--pg-width);
 }
@@ -199,6 +208,17 @@ footer p {
  }
 }
 
+.character > div {
+  margin-left: 1rem;
+}
+.character a{
+  margin: auto;
+}
+
+.character a:hover {
+  background:transparent;
+}
+
 .character h2 {
   margin-bottom: 1rem;
 text-align: left;
@@ -216,12 +236,13 @@ text-align: left;
 /* archive */
 .archive-select {
   width: min(400px, 98%);
+  margin-bottom:2rem;
 }
 
 .chapter {
   display: flex;
   gap: 1rem;
-  margin-bottom: 0.25rem;
+  margin-bottom: 2rem;
 }
 .chapter h3 {
     margin: 0;
@@ -360,7 +381,7 @@ body {
   width: 100%;
   background: var(--color-background);
   background-image: var(--background-image);
-  line-height: 125%;
+  line-height: 1.5rem;
   text-align: left;
   color: var(--color-body-text);
 }
@@ -506,8 +527,8 @@ h1 {
 }
 
 h2 {
-  color: var(--color-accent-alt);
   text-decoration: underline;
+  margin-bottom:2rem;
 }
 
 /* body font */
@@ -525,7 +546,7 @@ h2 {
   max-width: 98%;
   margin: auto;
   margin-bottom: 10px;
-  padding: 12px;
+  padding: 1.5rem;
   border-radius: 0px 0px 10px 10px;
   background-color: var(--color-content-background);
   display: block;
@@ -587,22 +608,26 @@ background: var(--color-accent-link);
 /* link colors */
 a {
   color: var(--color-accent-link);
+  font-weight: bolder;
+  max-width: fit-content;
 }
 a:hover {
   color: var(--link-color-hover);
+  cursor: url("https://scumsuck.com/images/maplestory.png"), auto;
 }
 
 
-p a:hover, li a:hover  {
-color: var(--color-accent-link);
-  cursor: url("https://scumsuck.com/images/maplestory.png"), auto;
+main a:hover  {
+color: var(--color-foreground-text);
+background: var(--color-accent-link);
   text-decoration: none;
 }
 
 footer a:hover{
   color: var(--color-accent);
   background:var(--color-foreground-text);
-  text-decoration: underline dashed;
+  text-decoration: none;
+  cursor: url("https://scumsuck.com/images/maplestory.png"), auto;
 }
 
 
@@ -672,15 +697,16 @@ header img {
   max-width: 98%;
 }
 
-nav a, .comicNav a img {  --stroke-pos: 1px;
+nav a, .comicNav a, .social-media a {  --stroke-pos: 1px;
   --stroke-neg: -1px;
   --stroke-color: var(--color-foreground-text);
   filter: drop-shadow(var(--stroke-pos) 0 0 var(--stroke-color)) drop-shadow(var(--stroke-neg) 0 var(--stroke-color)) drop-shadow(0 var(--stroke-pos) 0 var(--stroke-color)) drop-shadow(0 var(--stroke-neg) 0 var(--stroke-color)) drop-shadow(var(--stroke-pos) var(--stroke-pos) 0 var(--stroke-color)) drop-shadow(var(--stroke-pos) var(--stroke-neg) 0 var(--stroke-color)) drop-shadow(var(--stroke-neg) var(--stroke-pos) 0 var(--stroke-color)) drop-shadow(var(--stroke-neg) var(--stroke-neg) 0 var(--stroke-color))}
 
   
-nav a:hover, .comicNav a img:hover {
---stroke-color: var(--color-accent-alt2);
+nav a:hover, .comicNav a:hover, .social-media a:hover {
+--stroke-color: var(--color-accent-link);
 transform: scale(.90);
+background:transparent;
 }
 
 /* style comic page image */
