@@ -20,8 +20,8 @@ individual collections to use within templates.
 </div>
 {%# If we have author notes, include them %}
 {% unless latest.content == "" %}
+  <h1>{{ latest.data.title }}</h1>
   <div class="authorNotes paperDiv">
-    <h1>{{ latest.data.title }}</h1>
     <p class="authorNotes-date">posted on {{ latest.date | utcDate }}</p>
     {{ latest.content }}
   </div>

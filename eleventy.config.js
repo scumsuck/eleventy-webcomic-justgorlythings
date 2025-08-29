@@ -18,7 +18,8 @@ module.exports = function(eleventyConfig) {
 		eleventyConfig.addPassthroughCopy("js");
 		eleventyConfig.addPassthroughCopy("robots.txt");
 		eleventyConfig.addPlugin(eleventyImageTransformPlugin, {
-			widths: [100, "auto"], 
+			widths: [200, "auto"], 
+			formats: ["auto"],
 			defaultAttributes: {
 			  loading: 'lazy'
 			}

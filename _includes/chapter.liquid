@@ -26,7 +26,7 @@ the page."
     <div class="chapter">
       {%# If `thumbnails` is true, display the page's thumbnail %}
       {% if thumbnails %}
-        <img src="{{ item.data.images[0] }}" width="100" alt="Thumbnail for {{ item.data.title }}">
+        <img src="{{ item.data.images[0] }}" alt="Thumbnail for {{ item.data.title }}">
       {% endif %}
       <h3>
         <a href="{{ item.url }}">{{ item.data.title }}</a>
