@@ -11,8 +11,6 @@
 
 :root {
   --pg-width: min(64rem, 1000px);
-  /* page width for double/spread pages that are one page */
-  --double-pg-width: min(84rem, 100%);
 }
 
 
@@ -84,6 +82,12 @@ font-family: var(--antique-font-stack);
 
 /* HEADER */
 
+.comic-title {
+  font-size: clamp(5rem, -2rem + 16vw, 8rem);
+  line-height: clamp(5rem, -1rem + 16vw, 8rem);
+  margin-bottom:2rem;
+}
+
 header {
   display: flex;
   flex-direction: column;
@@ -128,11 +132,11 @@ footer p {
   padding: 20px;
   max-width: 100%;
   border-radius: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 5em;
 }
 
-.double-page #comicPage {
-  width: var(--double-pg-width);
-}
 
 #comicPage img {
   display: block;
@@ -645,40 +649,32 @@ header #nav {
 }
 
 /* header image */
-header img {
-  max-width: 100%;
-}
 
-
-
-.banner {
-  display: flex;
-  max-width: 500px;
-  width: 100%;
+.warning {
   margin: auto;
-  margin-top: 15px;
-  border: 1px solid var(--color-accent);
-  justify-content: center;
-  height: auto;
-  overflow: hidden;
-}
-
-.banner img {
-  width: 100%;
-}
-
-.writePageNote {
-  margin: auto;
-  margin-top: 10px;
-  margin-bottom:1em;
-  text-align: center;
-  padding: 10px;
+  margin-top: 2rem;
+  margin-bottom:2rem;
+  text-align: left;
+  padding: 1em;
   background-color: var(--color-accent-alt);
-  max-width: 500px;
+  max-width: 450px;
   width: 98%;
   border-radius: 30px;
-  color: var(--color-foreground-text);
   overflow: hidden;
+  justify-content: center;
+  align-content: center;
+}
+
+.warning p {
+background: var(--color-background);
+border-radius: 1em;
+margin: auto;
+padding:.5em;
+}
+
+.warning img {
+  padding: 1em;
+  max-width: 140px;
 }
 
 /* HOMEPAGE */
@@ -805,6 +801,17 @@ header img:hover {
 }
 
 /* FOOTER */
+
+.logo {
+  max-width: 100%;
+  margin: 2rem auto;
+}
+
+textarea{
+width: 100%;
+max-width: 100%;
+}
+
 footer {
   display: flex;
   flex-direction: column;

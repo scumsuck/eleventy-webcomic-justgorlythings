@@ -1,5 +1,7 @@
 # eleventy-webcomic
 
+run ''npx @11ty/eleventy --serve'' in the terminal for live preview!!!!
+
 > This is a quick overview of things if you kind of know what you're doing. More extensive instructions are coming!!
 
 This is a template of a template of a template. Eleventy-webcomic is a template, built off of the Rashon's [eleventy-rarebit](), which itself is built to replicate the functionality found in [geno7's](https://geno7.neocities.org/) [Rarebit](https://rarebit.neocities.org/) webcomic template.
