@@ -24,8 +24,10 @@ individual collections to use within templates.
   <div class="authorNotes paperDiv">
     <p class="authorNotes-date">posted on {{ latest.date | utcDate }}</p>
     {{ latest.content }}
+<details><summary>Image description:</summary>{{ latest.data.alt }}</details>
   </div>
 {% endunless %}
+
 
 {% comment %} 
 {% render 'comments.liquid' pageUrl: latest.url %}

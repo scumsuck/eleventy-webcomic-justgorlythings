@@ -41,11 +41,12 @@
   --link-color-hover: #eaebf0;
   --background-image: url("/img/hip-square-dark.png");
   --notes:#eaebf08a;
+  --alt-bg:#101325;
 
 }
 
 [data-selected-theme="light"] {
-  --color-background: #f7e7de;
+  --color-background: #fcf6f2;
   --color-content-background: #f7e7de;
   --color-foreground: #5b7a8c;
   --color-foreground-text: #f7e7de;
@@ -58,6 +59,8 @@
   --link-color-hover:rgba(39, 35, 37, 1);
   --background-image: url("/img/hip-square.png");
   --notes:rgba(39, 35, 37, .75);
+  --alt-bg:#fcf6f280;
+
 }
 
 
@@ -918,13 +921,21 @@ hr.dotted {
   border-top: 1px dashed var(--color-accent);
 }
 
+details {
+  background: var(--alt-bg);
+  padding: 1em;
+}
+
 summary {
   transition: all 0.2s;
+  margin: 1em;
 }
 
 summary:hover {
   color: var(--color-accent);
+
   transition: all 0.2s;
+  max-width: fit-content;
 }
 
 .gallery {
