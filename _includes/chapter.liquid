@@ -16,6 +16,7 @@ the page."
                 <h3>
                   <a href="{{ item.url }}">{{ item.data.title }}</a>
                 </h3>
+                <p><a href="{{ item.url }}">{{ item.data.tags }}</a></p>
               </div>
             {% endfor %}
         </div>
@@ -31,6 +32,7 @@ the page."
       <h3>
         <a href="{{ item.url }}">{{ item.data.title }}</a>
       </h3>
+
     </div>
   {% endfor %}
 {% endif %}
